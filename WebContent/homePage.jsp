@@ -22,7 +22,7 @@
 <!-- Custom styles for this template -->
 <link href="main.css" rel="stylesheet">
 </head>
-<body>
+<body onload="connectToServer()">
 	<header>
 		<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
 			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="homePage.jsp">
@@ -188,7 +188,22 @@
 	</div>
 
 	</main>
-
+	
+	<script>	
+		function connectToServer() {
+			console.log("Made it to this call");
+			socket = new WebSocket("ws://localhost:8080/NotifyMe_Final/ws2");
+			socket.onopen = function(event) {
+				document.getElementById("mychat").innerHTML += "Connected! <br />";
+			}
+			socket.onmessage = function(event) {
+				document.getElementById("mychat").innerHTML += event.data + "<br />";
+			}
+			socket.onclose = function(event) {
+				document.getElementById("mychat").innerHTML += "Disconnected! <br />";
+			}
+		}
+	</script>
 	<footer class="text-muted"> </footer>
 
 	<!-- Bootstrap core JavaScript

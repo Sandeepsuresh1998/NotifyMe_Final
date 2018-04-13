@@ -42,6 +42,8 @@ public class MainServer extends Thread {
 	
 	@Override
 	public void run() {
+		//Create Threads for each API.  
 		
+		//
 	}
 }
