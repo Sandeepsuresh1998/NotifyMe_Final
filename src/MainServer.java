@@ -1,48 +1,47 @@
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 
-public class MainServer {
-	String accessToken;
-	ObjectOutputStream objectOutputStream;
-	ObjectInputStream objectInputStream;
-	Socket socket;
+import java.io.IOException;
+import java.util.Vector;
+
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
+
+@ServerEndpoint(value = "/ws2")
+public class MainServer extends Thread {
 	
-	public MainServer(int port) {
-		
-		ServerSocket ss = new ServerSocket(port);
-		
-		//Connect to Database
-		
-		//Get List of APIs and Access Tokens
-		
-		//Make threads for each API
-		
-		//Execute each thread to make call to said API
+	//Static so that there is only one instance of it.
+	private static Vector<Session> sessionVector = new Vector<Session>();
+	
+	@OnOpen
+	public void open(Session session) {
+		System.out.println("Client connected");
+		sessionVector.add(session);
 	}
 	
-	public static void main(String[] args) {
-		new MainServer(6789);
-	}
-	
-	public void updateAPI(String api_name) {
-		
-		//Switch statement
-		switch(api_name) {
-			case "twitter" :
+	@OnMessage
+	public void onMessage(String message, Session session) {
+		System.out.println(message);
+		try {
+			for(Session s : sessionVector) {
+				s.getBasicRemote().sendText(message);
 				
-			case "youtube" :
-				
-			case "gmail" :
-				
-			case "calendar" : 
-				
-			case "stocks" :
-				
-			case "weather" : 
-				
+			}
+		} catch (IOException ioe) {
+			System.out.println("ioe: " + ioe.getMessage());
 		}
 	}
-
+	
+	@OnClose
+	public void close(Session session) {
+		System.out.println("Client disconnected");
+		sessionVector.remove(session);
+	}
+	
+	
+	@Override
+	public void run() {
+		
+	}
 }
