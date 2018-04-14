@@ -1,11 +1,18 @@
 import java.io.IOException;
+import java.util.HashMap;
 
+import javax.crypto.spec.GCMParameterSpec;
 import javax.websocket.Session;
+
+import org.apache.http.impl.client.EntityEnclosingRequestWrapper;
+
+import com.google.gson.Gson;
 
 import twitter4j.Trend;
 import twitter4j.Trends;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.TwitterObjectFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterApi extends Thread{
@@ -18,6 +25,7 @@ public class TwitterApi extends Thread{
 	
 	public void run() {
 		while(true) {
+			System.out.println("Twitter Run!");
 			ConfigurationBuilder cBuilder = new ConfigurationBuilder();
 			
 			cBuilder.setDebugEnabled(true)
@@ -33,16 +41,24 @@ public class TwitterApi extends Thread{
 			Trends trends;
 			try {
 				trends = twitter.getPlaceTrends(1);
-				for(Trend trend : trends.getTrends()) {
-					mSession.getBasicRemote().sendText(trend.getName());
+				
+				HashMap<String, String> twitterData = new HashMap<String, String>();
+				for(Trend t : trends.getTrends()) {
+					twitterData.put(t.getName(), t.getURL());
 				}
+				Gson gson = new Gson();
+				String twitterJson = gson.toJson(twitterData);
+				
+				String data = "Twitter|" + twitterJson;
+				
+				mSession.getBasicRemote().sendText(data);
 
 			} catch (TwitterException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
-				Thread.sleep(10000); //Ten seconds 
+				Thread.sleep(20000); //Ten seconds 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

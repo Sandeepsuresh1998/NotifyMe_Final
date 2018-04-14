@@ -197,7 +197,24 @@
 				document.getElementById("tweet_1").innerHTML += "Connected! <br />";
 			}
 			socket.onmessage = function(event) {
-				document.getElementById("tweet_1").innerHTML += event.data + "<br />";
+				
+				var data = event.data.split("|");
+				
+				var header = data[0];
+				
+				if(header.includes("Twitter")) {
+					var obj = JSON.parse(data[1]);
+					console.log(obj);
+					
+					for (var key in obj) {
+					  if (obj.hasOwnProperty(key)) {
+					  	var twitterName = key;//Name of twitter object
+					    var twitterURL = obj[key];
+					  }
+					}  
+				}
+				
+				
 			}
 			socket.onclose = function(event) {
 				document.getElementById("tweet_1").innerHTML += "Disconnected! <br />";
