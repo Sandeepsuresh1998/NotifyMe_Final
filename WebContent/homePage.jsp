@@ -194,7 +194,7 @@
 			console.log("Made it to this call");
 			socket = new WebSocket("ws://localhost:8080/NotifyMe_Final/ws");
 			socket.onopen = function(event) {
-				document.getElementById("tweet_1").innerHTML += "Connected! <br />";
+				console.log("Connection established");
 			}
 			socket.onmessage = function(event) {
 				
@@ -206,10 +206,20 @@
 					var obj = JSON.parse(data[1]);
 					console.log(obj);
 					
+					var idNum = 0;
 					for (var key in obj) {
 					  if (obj.hasOwnProperty(key)) {
+						if(idNum >= 10) {
+							break;
+						}
 					  	var twitterName = key;//Name of twitter object
 					    var twitterURL = obj[key];
+					  	var tweet_div = document.getElementById("tweet_" + idNum);
+					  	var anchorTag = document.createElement("a");
+					  	anchorTag.innerHTML = twitterName;
+					  	anchorTag.href = twitterURL;
+					  	tweet_div.appendChild(anchorTag);
+					  	idNum++;
 					  }
 					}  
 				}
