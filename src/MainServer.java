@@ -8,7 +8,9 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint(value = "/ws2")
+import twitter4j.Twitter;
+
+@ServerEndpoint(value = "/ws")
 public class MainServer extends Thread {
 	
 	//Static so that there is only one instance of it.
@@ -17,6 +19,9 @@ public class MainServer extends Thread {
 	@OnOpen
 	public void open(Session session) {
 		System.out.println("Client connected");
+		System.out.println("Twitter!");
+		
+		TwitterApi tApi = new TwitterApi(session);
 		sessionVector.add(session);
 	}
 	
