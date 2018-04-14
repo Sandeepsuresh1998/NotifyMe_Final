@@ -192,15 +192,15 @@
 	<script>	
 		function connectToServer() {
 			console.log("Made it to this call");
-			socket = new WebSocket("ws://localhost:8080/NotifyMe_Final/ws2");
+			socket = new WebSocket("ws://localhost:8080/NotifyMe_Final/ws");
 			socket.onopen = function(event) {
-				document.getElementById("mychat").innerHTML += "Connected! <br />";
+				document.getElementById("tweet_1").innerHTML += "Connected! <br />";
 			}
 			socket.onmessage = function(event) {
-				document.getElementById("mychat").innerHTML += event.data + "<br />";
+				document.getElementById("tweet_1").innerHTML += event.data + "<br />";
 			}
 			socket.onclose = function(event) {
-				document.getElementById("mychat").innerHTML += "Disconnected! <br />";
+				document.getElementById("tweet_1").innerHTML += "Disconnected! <br />";
 			}
 		}
 	</script>
