@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -59,7 +60,11 @@ public class LoginServlet extends HttpServlet {
 				String familyName = (String) payload.get("family_name");
 				String givenName = (String) payload.get("given_name");
 				System.out.println("Servlet: This is a new user");
+				
 				DBController.signUpNewUser(userId, givenName, familyName, pictureUrl, email);
+				
+				HttpSession hs = request.getSession(true);
+				hs.setAttribute("sessionId", userId);
 			}
 			
 		} catch (GeneralSecurityException e) {

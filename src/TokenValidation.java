@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -37,6 +38,10 @@ public class TokenValidation extends HttpServlet {
 		String accessToken = request.getParameter("accessToken");
 		System.out.println("In TokenValidation");
 		System.out.println(accessToken);
+		
+		HttpSession hs = request.getSession(false);
+		String userId = (String) hs.getAttribute("sessionId");
+		DBController.addAccessToken(userId, accessToken);
 		
 		YoutubeAPI  myYouTubeAPI = new YoutubeAPI(accessToken);
 		

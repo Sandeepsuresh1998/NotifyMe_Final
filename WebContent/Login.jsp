@@ -22,12 +22,18 @@
 	function onSignIn(googleUser) {
 		var token = googleUser.getAuthResponse().id_token;
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', 'http://localhost:8080/YOUR_OWN_DIRECTORY/LoginServlet', true);
+		xhr.open('POST', 'http://localhost:8080/YOUR_OWN_DIRECTORY/LoginServlet', false);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.onload = function() {
 			console.log('Signed in as: ' + xhr.responseText);
 		};
 		xhr.send('token=' + token)
+		
+		// show authorize button
+		
+		// function for oauth
+		// ...
+		
 	};
 </script>
 </body>

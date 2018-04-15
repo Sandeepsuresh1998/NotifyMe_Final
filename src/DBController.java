@@ -55,7 +55,7 @@ public class DBController {
 				return false;
 			}
 		} catch (SQLException e) {
-			System.out.println("SQLException in function \"validate\"");
+			System.out.println("SQLException in function \"isReturningUser\"");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -85,7 +85,7 @@ public class DBController {
 			ps.setBoolean(11, true);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQLException in function \"validate\"");
+			System.out.println("SQLException in function \"signUpNewUser\"");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -106,7 +106,7 @@ public class DBController {
 			ps.setString(4, userId);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQLException in function \"validate\"");
+			System.out.println("SQLException in function \"updateUserInfo\"");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -134,7 +134,7 @@ public class DBController {
 				UserInfo.add(rs.getString("pictureUrl"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQLException in function \"validate\"");
+			System.out.println("SQLException in function \"getUserInfo\"");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -162,7 +162,7 @@ public class DBController {
 			ps.setString(7, userId);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQLException in function \"validate\"");
+			System.out.println("SQLException in function \"updatePreferences\"");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -197,13 +197,29 @@ public class DBController {
 				preferences.add(rs.getBoolean("useStock"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQLException in function \"validate\"");
+			System.out.println("SQLException in function \"getPreferences\"");
 			e.printStackTrace();
 		} finally {
 			close();
 		}
 		System.out.println("get preference success");
 		return preferences;
+	}
+
+	public static void addAccessToken(String userId, String accessToken) {
+		connect();
+		try {
+			ps = conn.prepareStatement("update UserInfo set accessToken=? where userId=?");
+			ps.setString(1, accessToken);
+			ps.setString(2, userId);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQLException in function \"addAccessToken\"");
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		System.out.println("update accessToken success");
 	}
 	
 	// main for testing above mothods
