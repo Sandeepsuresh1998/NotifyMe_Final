@@ -19,14 +19,14 @@ import com.google.api.services.youtube.model.SubscriptionListResponse;
  * @author yutianli
  *
  */
-public class YouTubeAPI extends Thread {
+public class YoutubeAPI extends Thread {
 	//private String accessToken;
 	private GoogleCredential credential;
 	private YouTube youtube;
 	/**
 	 * 
 	 */
-	public YouTubeAPI(String accessToken) {
+	public YoutubeAPI(String accessToken) {
 		System.out.println("In YouTube API Thread");
 		// TODO Auto-generated constructor stub
 		//this.accessToken = accessToken;

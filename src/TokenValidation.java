@@ -38,7 +38,7 @@ public class TokenValidation extends HttpServlet {
 		System.out.println("In TokenValidation");
 		System.out.println(accessToken);
 		
-		YouTubeAPI  myYouTubeAPI = new YouTubeAPI(accessToken);
+		YoutubeAPI  myYouTubeAPI = new YoutubeAPI(accessToken);
 		
 		
 		
