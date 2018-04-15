@@ -222,6 +222,9 @@
 					  	idNum++;
 					  }
 					}  
+				} else if(header.includes("Weather")) {
+					var obj = JSON.parse(data[1]);
+					console.log(obj);
 				}
 				
 				
