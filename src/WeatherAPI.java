@@ -35,8 +35,4 @@ public class WeatherAPI extends Thread{
 			ioe.printStackTrace();
 		}
 	}
-	
-	public double kelvinToFahrenheit(double temp) {
-		return (temp * (9.0/5.0) - 459.67);
-	}
 }

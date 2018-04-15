@@ -22,6 +22,7 @@ public class MainServer extends Thread {
 		System.out.println("Twitter!");
 		
 		TwitterApi tApi = new TwitterApi(session);
+		WeatherAPI wApi = new WeatherAPI(session);
 		sessionVector.add(session);
 	}
 	

@@ -223,15 +223,54 @@
 					  }
 					}  
 				} else if(header.includes("Weather")) {
+					
 					var obj = JSON.parse(data[1]);
 					console.log(obj);
+					
+					var iconNum = obj.weather[0].icon;
+					var description = obj.weather[0].description;
+					var temp = Math.trunc(kelvinToFahrenheit(obj.main.temp));
+					
+					
+					
+					
+					var weatherDiv = document.getElementById("weatherBody");
+					
+					//Get pic 
+					var weatherIcon = document.createElement("IMG");
+					weatherIcon.alt = "Weather.img";
+					console.log("http://openweathermap.org/img/w/" + iconNum + "png");
+					weatherIcon.src = "http://openweathermap.org/img/w/" + iconNum + ".png";
+					weatherDiv.appendChild(weatherIcon);
+					
+					//Get Temperature
+					var tempElement = document.createTextNode(temp)
+					var tempHeader = document.createElement("h1");
+					tempHeader.appendChild(tempElement);
+					weatherDiv.appendChild(tempHeader);
+										
+					//Get Description
+					var descriptionElement = document.createTextNode(description)
+					var descriptionHeader = document.createElement("h1");
+					descriptionHeader.appendChild(descriptionElement);
+					weatherDiv.appendChild(descriptionHeader);
+					
+					
+					
+					
 				}
 				
 				
 			}
 			socket.onclose = function(event) {
-				document.getElementById("tweet_1").innerHTML += "Disconnected! <br />";
+				
 			}
+		
+		}
+		
+		
+		function kelvinToFahrenheit(temp) {
+			return (temp * (9.0/5.0) - 459.67);
 		}
 	</script>
 	<footer class="text-muted"> </footer>
