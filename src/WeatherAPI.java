@@ -1,18 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.invoke.VarHandle;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 
 import javax.websocket.Session;
-import com.google.api.client.json.Json;
-import com.google.api.services.youtube.model.VideoContentDetails;
-import com.google.gson.Gson;
 
 public class WeatherAPI extends Thread{
 	private Session mSession;
