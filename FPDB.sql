@@ -1,4 +1,4 @@
-drop database if exists FPDB;
+-- drop database if exists FPDB;
 create database FPDB;
 use FPDB;
 
@@ -15,6 +15,6 @@ create table UserInfo (
     useCalendar boolean not null,
     useYouTube boolean not null,
     useStock boolean not null,
-    accessToken varchar(200)
+    accessToken varchar(300)
 );
 

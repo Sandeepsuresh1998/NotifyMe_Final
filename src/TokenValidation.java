@@ -43,25 +43,8 @@ public class TokenValidation extends HttpServlet {
 		String userId = (String) hs.getAttribute("sessionId");
 		DBController.addAccessToken(userId, accessToken);
 		
-		YoutubeAPI  myYouTubeAPI = new YoutubeAPI(accessToken);
-		
-		
-		
-		
-		
-		
-		//Get profile info from ID token
-//		GoogleIdToken idToken = tokenResponse.parseIdToken();
-//		GoogleIdToken.Payload payload = idToken.getPayload();
-//		String userId = payload.getSubject();  // Use this value as a key to identify a user.
-//		String email = payload.getEmail();
-//		boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-//		String name = (String) payload.get("name");
-//		String pictureUrl = (String) payload.get("picture");
-//		String locale = (String) payload.get("locale");
-//		String familyName = (String) payload.get("family_name");
-//		String givenName = (String) payload.get("given_name");
+//		YoutubeAPI  myYouTubeAPI = new YoutubeAPI(accessToken);
+
 	}
 	
-
 }
