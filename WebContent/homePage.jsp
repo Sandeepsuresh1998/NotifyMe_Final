@@ -270,6 +270,7 @@
 					for (i = 0; i < 8; i++) {
 						$('#email_from_'+i).html(obj[i].from);
 						$('#subject_'+i).html(obj[i].subject);
+						$('#email_body_'+i).html(obj[i].snippet);
 					}
 				}
 				else if (header.includes("Crypto")) {

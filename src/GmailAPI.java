@@ -56,8 +56,8 @@ public class GmailAPI extends java.lang.Thread {
 		List<String> metadataHeaders = new ArrayList<>();
 		metadataHeaders.add("From");
 		metadataHeaders.add("Subject");
-		Message message = service.users().messages().get(userId, messageId).setFormat("metadata").setMetadataHeaders(metadataHeaders).execute();
-//		Message message = service.users().messages().get("me", "162cd4d43129749e").setFormat("metadata").execute();
+//		Message message = service.users().messages().get(userId, messageId).setFormat("metadata").setMetadataHeaders(metadataHeaders).execute();
+		Message message = service.users().messages().get(userId, messageId).execute();
 		if (message == null) {
 			System.out.println("null message");
 		}
@@ -101,15 +101,15 @@ public class GmailAPI extends java.lang.Thread {
 			System.out.println(messageId);
 			Message message = getMessage(service, userId, messageId);
 //			Message message = getMessage(messageId);
-//			int size = message.getPayload().getHeaders().size();
+			int size = message.getPayload().getHeaders().size();
 			String from = null;
 			String subject = null;
-			String snippet = null;
-//			String snippet = message.getSnippet();
-//			if (snippet.length() > 20) {
-//				snippet = (snippet.substring(0, 20) + "...");
-//			}
-			for (int j = 0; j < 2; j++) {
+//			String snippet = null;
+			String snippet = message.getSnippet();
+			if (snippet.length() > 50) {
+				snippet = (snippet.substring(0, 45) + "...");
+			}
+			for (int j = 0; j < size; j++) {
 				String temp = message.getPayload().getHeaders().get(j).getName();
 				if (temp.equals("From")) {
 					from = message.getPayload().getHeaders().get(j).getValue();
