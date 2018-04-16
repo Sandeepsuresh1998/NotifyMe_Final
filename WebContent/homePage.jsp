@@ -267,9 +267,10 @@
 					var obj = JSON.parse(data[1]);
 					console.log(obj);
 					
-					/* for (i = 0; i < 8; i++) {
-						$('#email_from_'+i).html();
-					} */
+					for (i = 0; i < 8; i++) {
+						$('#email_from_'+i).html(obj[i].from);
+						$('#subject_'+i).html(obj[i].subject);
+					}
 				}
 				else if (header.includes("Crypto")) {
 					var obj = JSON.parse(data[1]);
