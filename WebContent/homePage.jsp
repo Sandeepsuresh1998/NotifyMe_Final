@@ -283,6 +283,10 @@
 							tweet_div.appendChild(anchorTag);
 							idNum++;
 						} */
+				} else if (header.includes("Crypto")) {
+					var obj = JSON.parse(data[1]);
+					
+					//Put Crypto in its own div
 				}
 
 			}
