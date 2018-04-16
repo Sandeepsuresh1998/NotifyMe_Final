@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>NotifyMe - Login</title>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="OAuth.js"></script>
 <meta name="google-signin-client_id"

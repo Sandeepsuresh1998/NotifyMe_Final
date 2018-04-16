@@ -95,34 +95,29 @@ public class GmailAPI extends java.lang.Thread {
 			threads.addAll(response.getThreads());
 			if (response.getNextPageToken() != null) {
 				String pageToken = response.getNextPageToken();
-				response = service.users().threads().list(userId).setLabelIds(labelIds).setPageToken(pageToken)
-						.execute();
+				response = service.users().threads().list(userId).setLabelIds(labelIds).setPageToken(pageToken).execute();
 			} else {
 				break;
 			}
 		}
-
 		for (Thread thread : threads) {
 			System.out.println(thread.toPrettyString());
 		}
 	}
 
 	public void run() {
-		while (true) {
+		while (session.isOpen()) {
 			try {
 				List<Label> labels = listLabels(accessToken);
 				Gson json = new Gson();
 				String gson = json.toJson(labels);
 				String message = "Gmail|" + gson;
-				if (session != null) {
-					session.getBasicRemote().sendText(message);
-					java.lang.Thread.sleep(10000); // Ten seconds
-				}
-				else {
-					break;
-				}			
+//				session.getBasicRemote().sendText(message);
+				MainServer.sendUpdate(session, message);
+				java.lang.Thread.sleep(10000); // 10 seconds
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
+				break;
 			}
 		}
 	}

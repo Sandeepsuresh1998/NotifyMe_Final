@@ -62,13 +62,10 @@ public class LoginServlet extends HttpServlet {
 				System.out.println("in login servlet This is a new user");
 				
 				DBController.signUpNewUser(userId, givenName, familyName, pictureUrl, email);
-				
-				
 			}
 			HttpSession hs = request.getSession(true);
 			hs.setAttribute("userId", userId);
 			System.out.println("in login servlet user id " + hs.getAttribute("userId"));
-			
 		} catch (GeneralSecurityException e) {
 			e.printStackTrace();
 		}

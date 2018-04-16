@@ -293,7 +293,6 @@
 				
 			// on close
 			socket.onclose = function(event) {
-				localStorage.clear();
 			}
 			
 			// auto close when close window 
