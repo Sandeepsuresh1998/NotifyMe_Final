@@ -3,13 +3,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- <script src="WSConnections.js"></script> -->
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Album example for Bootstrap</title>
+<title>NotifyMe - Home</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -22,7 +23,7 @@
 <!-- Custom styles for this template -->
 <link href="main.css" rel="stylesheet">
 </head>
-<body onload="connectToServer()">
+<body onload="loadWidgets()">
 	<header>
 		<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
 			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="homePage.jsp">
@@ -117,7 +118,7 @@
 									<div class="vl"></div>
 								</div>
 								<div class="col-sm-5">
-									<div id="email_body_<%=i %>">{{MESSAGE BODY}}</div>
+									<div id="email_body_<%=i%>">{{MESSAGE BODY}}</div>
 								</div>
 
 							</div>
@@ -151,7 +152,9 @@
 					<div class="card mb-4 box-shadow">
 						<div class="card-body">
 							<h5 class="card-title">CNN</h5>
-							<%for(int i = 0; i < 5; i++){ %>
+							<%
+								for (int i = 0; i < 5; i++) {
+							%>
 							<div id="story_<%=i%>">
 								<div class="row">
 									<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
@@ -162,7 +165,9 @@
 										DECSRIPTION}}</div>
 								</div>
 							</div>
-							<%} %>
+							<%
+								}
+							%>
 						</div>
 					</div>
 				</div>
@@ -188,89 +193,113 @@
 	</div>
 
 	</main>
-	
-	<script>	
-		function connectToServer() {
-			console.log("Made it to this call");
+
+	<script>
+		function loadWidgets() {
+			var userId = localStorage.getItem('userId');
+			console.log("Made it to this call " + userId);
 			socket = new WebSocket("ws://localhost:8080/NotifyMe_Final/ws");
+			// on open
 			socket.onopen = function(event) {
+				socket.send(userId);
 				console.log("Connection established");
 			}
+			
+			// on message
 			socket.onmessage = function(event) {
-				
+
 				var data = event.data.split("|");
-				
+
 				var header = data[0];
-				
-				if(header.includes("Twitter")) {
+
+				if (header.includes("Twitter")) {
 					var obj = JSON.parse(data[1]);
 					console.log(obj);
-					
+
 					var idNum = 0;
-					for (var key in obj) {
-					  if (obj.hasOwnProperty(key)) {
-						if(idNum >= 10) {
-							break;
+					for ( var key in obj) {
+						if (obj.hasOwnProperty(key)) {
+							if (idNum >= 10) {
+								break;
+							}
+							var twitterName = key;//Name of twitter object
+							var twitterURL = obj[key];
+							var tweet_div = document.getElementById("tweet_" + idNum);
+							var anchorTag = document.createElement("a");
+							anchorTag.innerHTML = twitterName;
+							anchorTag.href = twitterURL;
+							tweet_div.appendChild(anchorTag);
+							idNum++;
 						}
-					  	var twitterName = key;//Name of twitter object
-					    var twitterURL = obj[key];
-					  	var tweet_div = document.getElementById("tweet_" + idNum);
-					  	var anchorTag = document.createElement("a");
-					  	anchorTag.innerHTML = twitterName;
-					  	anchorTag.href = twitterURL;
-					  	tweet_div.appendChild(anchorTag);
-					  	idNum++;
-					  }
-					}  
-				} else if(header.includes("Weather")) {
-					
+					}
+				}
+				else if (header.includes("Weather")) {
 					var obj = JSON.parse(data[1]);
 					console.log(obj);
-					
+
 					var iconNum = obj.weather[0].icon;
 					var description = obj.weather[0].description;
 					var temp = Math.trunc(kelvinToFahrenheit(obj.main.temp));
-					
-					
-					
-					
+
 					var weatherDiv = document.getElementById("weatherBody");
-					
+
 					//Get pic 
 					var weatherIcon = document.createElement("IMG");
 					weatherIcon.alt = "Weather.img";
 					console.log("http://openweathermap.org/img/w/" + iconNum + "png");
 					weatherIcon.src = "http://openweathermap.org/img/w/" + iconNum + ".png";
 					weatherDiv.appendChild(weatherIcon);
-					
+
 					//Get Temperature
 					var tempElement = document.createTextNode(temp)
 					var tempHeader = document.createElement("h1");
 					tempHeader.appendChild(tempElement);
 					weatherDiv.appendChild(tempHeader);
-										
+
 					//Get Description
-					var descriptionElement = document.createTextNode(description)
+					var descriptionElement = document
+							.createTextNode(description)
 					var descriptionHeader = document.createElement("h1");
 					descriptionHeader.appendChild(descriptionElement);
 					weatherDiv.appendChild(descriptionHeader);
-					
-					
-					
-					
 				}
-				
-				
+				else if (header.includes("Gmail")) {
+					var obj = JSON.parse(data[1]);
+					console.log(obj);
+/* 
+					var idNum = 0;
+					for (i = 0; i ) {
+						if (obj.hasOwnProperty(key)) {
+							if (idNum >= 10) {
+								break;
+							}
+							var twitterName = key;//Name of twitter object
+							var twitterURL = obj[key];
+							var tweet_div = document.getElementById("tweet_"
+									+ idNum);
+							var anchorTag = document.createElement("a");
+							anchorTag.innerHTML = twitterName;
+							anchorTag.href = twitterURL;
+							tweet_div.appendChild(anchorTag);
+							idNum++;
+						} */
+				}
+
 			}
+				
+			// on close
 			socket.onclose = function(event) {
-				
+				localStorage.clear();
 			}
-		
+			
+			// auto close when close window 
+			window.onbeforeunload = function(event) {
+				socket.close();
+			}
 		}
-		
-		
+
 		function kelvinToFahrenheit(temp) {
-			return (temp * (9.0/5.0) - 459.67);
+			return (temp * (9.0 / 5.0) - 459.67);
 		}
 	</script>
 	<footer class="text-muted"> </footer>
@@ -292,7 +321,6 @@
 </body>
 <%
 	
-
 %>
 
 

@@ -20,31 +20,38 @@ import com.google.api.services.youtube.model.SubscriptionListResponse;
 @WebServlet("/TokenValidation")
 public class TokenValidation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TokenValidation() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public TokenValidation() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//Collection<String> SCOPES = Arrays.asList("YouTubeScopes.https://www.googleapis.com/auth/youtube.force-ssl YouTubeScopes.https://www.googleapis.com/auth/youtubepartner");
+		// Collection<String> SCOPES =
+		// Arrays.asList("YouTubeScopes.https://www.googleapis.com/auth/youtube.force-ssl
+		// YouTubeScopes.https://www.googleapis.com/auth/youtubepartner");
 		String accessToken = request.getParameter("accessToken");
-		System.out.println("In TokenValidation");
-		System.out.println(accessToken);
-		
+		System.out.println("In TokenValidation access token " + accessToken);
+
 		HttpSession hs = request.getSession(false);
-		String userId = (String) hs.getAttribute("sessionId");
-		DBController.addAccessToken(userId, accessToken);
+		String userId = (String) hs.getAttribute("userId");
+		System.out.println("in token validation user id " + hs.getAttribute("userId"));
 		
-//		YoutubeAPI  myYouTubeAPI = new YoutubeAPI(accessToken);
+		DBController.addAccessToken(userId, accessToken);
+		System.out.println("in token validation access token " + DBController.getAccessToken(userId));
+		
+
+		// YoutubeAPI myYouTubeAPI = new YoutubeAPI(accessToken);
 
 	}
-	
+
 }

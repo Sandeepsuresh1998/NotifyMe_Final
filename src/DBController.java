@@ -5,8 +5,8 @@ public class DBController {
 	private static Connection conn = null;
 	private static ResultSet rs = null;
 	private static PreparedStatement ps = null;
-	
-	public static void connect(){
+
+	public static void connect() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/FPDB?user=root&password=root&useSSL=false");
@@ -16,18 +16,18 @@ public class DBController {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void close(){
-		try{
-			if (rs!=null){
+
+	public static void close() {
+		try {
+			if (rs != null) {
 				rs.close();
 				rs = null;
 			}
-			if(conn != null){
+			if (conn != null) {
 				conn.close();
 				conn = null;
 			}
-			if(ps != null ){
+			if (ps != null) {
 				ps = null;
 			}
 		} catch (SQLException sqle) {
@@ -35,12 +35,12 @@ public class DBController {
 			sqle.printStackTrace();
 		}
 	}
-	
+
 	// isReturningUser: check if the user has registered before
 	// parameter String userId
 	// return true if it is returning user
 	// return false if it is new user
-	public static boolean isReturningUser(String userId){
+	public static boolean isReturningUser(String userId) {
 		connect();
 		try {
 			ps = conn.prepareStatement("select exists (select userId from UserInfo where userId=?)");
@@ -62,11 +62,13 @@ public class DBController {
 		}
 		return false;
 	}
-	
+
 	// signUpNewUser: add the new user into the database
-	// parameter String userId, String givenName, String familyName, String pictureUrl, String email
+	// parameter String userId, String givenName, String familyName, String
+	// pictureUrl, String email
 	// return none
-	public static void signUpNewUser(String userId, String givenName, String familyName, String pictureUrl, String email) {
+	public static void signUpNewUser(String userId, String givenName, String familyName, String pictureUrl,
+			String email) {
 		connect();
 		try {
 			ps = conn.prepareStatement("insert into UserInfo (userId, givenName, familyName, pictureUrl, email, "
@@ -92,9 +94,10 @@ public class DBController {
 		}
 		System.out.println("sign up success");
 	}
-	
+
 	// updateUserInfo: update user info stored in database
-	// parameter String userId, String givenName, String familyName, String pictureUrl
+	// parameter String userId, String givenName, String familyName, String
+	// pictureUrl
 	// return none
 	public static void updateUserInfo(String userId, String givenName, String familyName, String pictureUrl) {
 		connect();
@@ -113,10 +116,10 @@ public class DBController {
 		}
 		System.out.println("update user info success");
 	}
-	
+
 	// getUserInfo: get user info
 	// parameter String userId
-	// return ArrayList<String> 
+	// return ArrayList<String>
 	// index 0 = first name
 	// index 1 = last name
 	// index 2 = profile picture url
@@ -142,12 +145,14 @@ public class DBController {
 		System.out.println("get user info success");
 		return UserInfo;
 	}
-	
-	// updatePreferences: update user preference on if he wants a widget to display or not
-	// parameter String userId, boolean useTwitter, boolean useGmail, boolean useWeather, 
-	//     boolean useCalendar, boolean useYouTube, boolean useStock
+
+	// updatePreferences: update user preference on if he wants a widget to display
+	// or not
+	// parameter String userId, boolean useTwitter, boolean useGmail, boolean
+	// useWeather,
+	// boolean useCalendar, boolean useYouTube, boolean useStock
 	// return none
-	public static void updatePreferences(String userId, boolean useTwitter, boolean useGmail, boolean useWeather, 
+	public static void updatePreferences(String userId, boolean useTwitter, boolean useGmail, boolean useWeather,
 			boolean useCalendar, boolean useYouTube, boolean useStock) {
 		connect();
 		try {
@@ -169,7 +174,7 @@ public class DBController {
 		}
 		System.out.println("update preference success");
 	}
-	
+
 	// getPreferences: get user preference on if he wants a widget to display or not
 	// parameter String userId
 	// return ArrayList<Boolean>
@@ -219,66 +224,91 @@ public class DBController {
 		} finally {
 			close();
 		}
-		System.out.println("update accessToken success");
+		System.out.println("add accessToken success");
 	}
-	
-	// main for testing above mothods
-//	public static void main(String[] args) {
-//		isReturningUser("runwei");
-//		isReturningUser("qwerty");
-//		signUpNewUser("runwei", "Runwei", "Lin", "https://pbs.twimg.com/profile_images/752912459388841984/aKLwROi__400x400.jpg", "runweili@usc.edu");
-//		isReturningUser("runwei");
-//		isReturningUser("qwerty");
-//		isReturningUser("miller");
-//		signUpNewUser("miller", "Jeff", "Miller", "http://www-scf.usc.edu/~csci201/images/jeffrey_miller.jpg", "fakemiller@usc.edu");
-//		isReturningUser("miller");
-//		ArrayList<String> userinfo = getUserInfo("miller");
-//		String fname = userinfo.get(0);
-//		String lname = userinfo.get(1);
-//		String url = userinfo.get(2);
-//		System.out.println(fname + " " + lname + " " + url);
-//		updateUserInfo("miller", "Jeffery", lname, url);
-//		userinfo = getUserInfo("miller");
-//		fname = userinfo.get(0);
-//		lname = userinfo.get(1);
-//		url = userinfo.get(2);
-//		System.out.println(fname + " " + lname + " " + url);
-//		ArrayList<Boolean> preferences = getPreferences("runwei");
-//		boolean twitter = preferences.get(0);
-//		boolean gmail = preferences.get(1);
-//		boolean weather = preferences.get(2);
-//		boolean calendar = preferences.get(3);
-//		boolean youtube = preferences.get(4);
-//		boolean stock = preferences.get(5);
-//		System.out.println(twitter + " " + gmail + " " + weather + " " + calendar + " " + youtube + " " + stock);
-//		updatePreferences("runwei", twitter, true, false, calendar, youtube, false);
-//		preferences = getPreferences("runwei");
-//		twitter = preferences.get(0);
-//		gmail = preferences.get(1);
-//		weather = preferences.get(2);
-//		calendar = preferences.get(3);
-//		youtube = preferences.get(4);
-//		stock = preferences.get(5);
-//		System.out.println(twitter + " " + gmail + " " + weather + " " + calendar + " " + youtube + " " + stock);
-//	}
-//	
-//	Twitter API Widget
-//	Sandeep Suresh
-	
-//	Gmail API
-//	Runwei Lin
-	
-//	OpenWeatherMap API	
-//	Zach Harju
-	
-//	Google Calendar API
-//	Sandeep Suresh
-	
-//	YouTube API
-//	Sandeep Suresh
-	
-//	News API by CNN
-//	Runwei Lin
 
+	public static String getAccessToken(String userId) {
+		connect();
+		String accessToken = null;
+		try {
+			ps = conn.prepareStatement("select accessToken from UserInfo where userId=?");
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				accessToken = rs.getString("accessToken");
+			}
+		} catch (SQLException e) {
+			System.out.println("SQLException in function \"getAccessToken\"");
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		System.out.println("get accessToken success");
+		return accessToken;
+	}
+
+	// main for testing above mothods
+	// public static void main(String[] args) {
+	// isReturningUser("runwei");
+	// isReturningUser("qwerty");
+	// signUpNewUser("runwei", "Runwei", "Lin",
+	// "https://pbs.twimg.com/profile_images/752912459388841984/aKLwROi__400x400.jpg",
+	// "runweili@usc.edu");
+	// isReturningUser("runwei");
+	// isReturningUser("qwerty");
+	// isReturningUser("miller");
+	// signUpNewUser("miller", "Jeff", "Miller",
+	// "http://www-scf.usc.edu/~csci201/images/jeffrey_miller.jpg",
+	// "fakemiller@usc.edu");
+	// isReturningUser("miller");
+	// ArrayList<String> userinfo = getUserInfo("miller");
+	// String fname = userinfo.get(0);
+	// String lname = userinfo.get(1);
+	// String url = userinfo.get(2);
+	// System.out.println(fname + " " + lname + " " + url);
+	// updateUserInfo("miller", "Jeffery", lname, url);
+	// userinfo = getUserInfo("miller");
+	// fname = userinfo.get(0);
+	// lname = userinfo.get(1);
+	// url = userinfo.get(2);
+	// System.out.println(fname + " " + lname + " " + url);
+	// ArrayList<Boolean> preferences = getPreferences("runwei");
+	// boolean twitter = preferences.get(0);
+	// boolean gmail = preferences.get(1);
+	// boolean weather = preferences.get(2);
+	// boolean calendar = preferences.get(3);
+	// boolean youtube = preferences.get(4);
+	// boolean stock = preferences.get(5);
+	// System.out.println(twitter + " " + gmail + " " + weather + " " + calendar + "
+	// " + youtube + " " + stock);
+	// updatePreferences("runwei", twitter, true, false, calendar, youtube, false);
+	// preferences = getPreferences("runwei");
+	// twitter = preferences.get(0);
+	// gmail = preferences.get(1);
+	// weather = preferences.get(2);
+	// calendar = preferences.get(3);
+	// youtube = preferences.get(4);
+	// stock = preferences.get(5);
+	// System.out.println(twitter + " " + gmail + " " + weather + " " + calendar + "
+	// " + youtube + " " + stock);
+	// }
+	//
+	// Twitter API Widget
+	// Sandeep Suresh
+
+	// Gmail API
+	// Runwei Lin
+
+	// OpenWeatherMap API
+	// Zach Harju
+
+	// Google Calendar API
+	// Sandeep Suresh
+
+	// YouTube API
+	// Sandeep Suresh
+
+	// News API by CNN
+	// Runwei Lin
 
 }

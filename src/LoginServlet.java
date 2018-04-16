@@ -52,20 +52,22 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("User ID: " + userId);
 			
 			if (DBController.isReturningUser(userId)) {
-				System.out.println("Servlet: This is a returning user");
+				System.out.println("in login servlet This is a returning user");
 			}
 			else {
 				String email = payload.getEmail();
 				String pictureUrl = (String) payload.get("picture");
 				String familyName = (String) payload.get("family_name");
 				String givenName = (String) payload.get("given_name");
-				System.out.println("Servlet: This is a new user");
+				System.out.println("in login servlet This is a new user");
 				
 				DBController.signUpNewUser(userId, givenName, familyName, pictureUrl, email);
 				
-				HttpSession hs = request.getSession(true);
-				hs.setAttribute("sessionId", userId);
+				
 			}
+			HttpSession hs = request.getSession(true);
+			hs.setAttribute("userId", userId);
+			System.out.println("in login servlet user id " + hs.getAttribute("userId"));
 			
 		} catch (GeneralSecurityException e) {
 			e.printStackTrace();
