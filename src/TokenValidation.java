@@ -35,10 +35,6 @@ public class TokenValidation extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// Collection<String> SCOPES =
-		// Arrays.asList("YouTubeScopes.https://www.googleapis.com/auth/youtube.force-ssl
-		// YouTubeScopes.https://www.googleapis.com/auth/youtubepartner");
 		String accessToken = request.getParameter("accessToken");
 		System.out.println("In TokenValidation access token " + accessToken);
 
