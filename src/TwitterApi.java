@@ -50,18 +50,15 @@ public class TwitterApi extends Thread{
 				String twitterJson = gson.toJson(twitterData);
 				
 				String data = "Twitter|" + twitterJson;
+				if (mSession != null) {
+					mSession.getBasicRemote().sendText(data);
+					Thread.sleep(20000); //Ten seconds 
+				}
 				
-				mSession.getBasicRemote().sendText(data);
 
-			} catch (TwitterException | IOException e) {
+			} catch (TwitterException | IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				Thread.sleep(20000); //Ten seconds 
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e.printStackTrace();				
 			}
 		}
 		

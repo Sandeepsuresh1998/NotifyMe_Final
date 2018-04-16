@@ -114,8 +114,13 @@ public class GmailAPI extends java.lang.Thread {
 				Gson json = new Gson();
 				String gson = json.toJson(labels);
 				String message = "Gmail|" + gson;
-				session.getBasicRemote().sendText(message);
-				java.lang.Thread.sleep(10000); // Ten seconds
+				if (session != null) {
+					session.getBasicRemote().sendText(message);
+					java.lang.Thread.sleep(10000); // Ten seconds
+				}
+				else {
+					break;
+				}			
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}

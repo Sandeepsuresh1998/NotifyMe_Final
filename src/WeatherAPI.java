@@ -29,9 +29,13 @@ public class WeatherAPI extends Thread{
 		        }
 		        System.out.println(response);
 		        String weatherData = "Weather|" + response;
-		        mSession.getBasicRemote().sendText(weatherData);
-		            
-		        Thread.sleep(600000);
+		        if (mSession != null) {
+		        	 mSession.getBasicRemote().sendText(weatherData);
+		        	 Thread.sleep(600000);
+		        }
+		        else {
+		        	break;
+		        }
 			} catch (IOException ioe) {
 				// TODO Auto-generated catch block
 				ioe.printStackTrace();
