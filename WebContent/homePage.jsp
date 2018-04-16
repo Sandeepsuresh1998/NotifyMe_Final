@@ -266,24 +266,12 @@
 				else if (header.includes("Gmail")) {
 					var obj = JSON.parse(data[1]);
 					console.log(obj);
-/* 
-					var idNum = 0;
-					for (i = 0; i ) {
-						if (obj.hasOwnProperty(key)) {
-							if (idNum >= 10) {
-								break;
-							}
-							var twitterName = key;//Name of twitter object
-							var twitterURL = obj[key];
-							var tweet_div = document.getElementById("tweet_"
-									+ idNum);
-							var anchorTag = document.createElement("a");
-							anchorTag.innerHTML = twitterName;
-							anchorTag.href = twitterURL;
-							tweet_div.appendChild(anchorTag);
-							idNum++;
-						} */
-				} else if (header.includes("Crypto")) {
+					
+					/* for (i = 0; i < 8; i++) {
+						$('#email_from_'+i).html();
+					} */
+				}
+				else if (header.includes("Crypto")) {
 					var obj = JSON.parse(data[1]);
 					
 					//Put Crypto in its own div

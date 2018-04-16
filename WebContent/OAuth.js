@@ -71,7 +71,11 @@ function oauth2SignIn() {
 	var params = {
 		'client_id' : YOUR_CLIENT_ID,
 		'redirect_uri' : YOUR_REDIRECT_URI,
-		'scope' : 'https://www.googleapis.com/auth/youtube.force-ssl https://www.googleapis.com/auth/gmail.metadata',
+		'scope' : 'https://www.googleapis.com/auth/youtube.force-ssl ' + 
+			'https://mail.google.com/ ' + 
+			'https://www.googleapis.com/auth/gmail.metadata ' + 
+			'https://www.googleapis.com/auth/gmail.modify ' + 
+			'https://www.googleapis.com/auth/gmail.readonly',
 		'state' : 'try_sample_request',
 		'include_granted_scopes' : 'true',
 		'response_type' : 'token'

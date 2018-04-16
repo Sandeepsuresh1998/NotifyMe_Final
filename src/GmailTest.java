@@ -2,47 +2,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.Session;
-
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.ListMessagesResponse;
-import com.google.gson.Gson;
 import com.google.api.services.gmail.model.Message;
+import com.google.gson.Gson;
 
-public class GmailAPI extends java.lang.Thread {
-	private Session session;
-	private String accessToken;
-	
-	public GmailAPI(Session s, String token) {
-		this.session = s;
-		this.accessToken = token;
-		this.start();
-	}
-
-//	public List<Label> listLabels(String accessToken) throws IOException {
-//		// Build a new authorized API client service.
-//		GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
-//
-//		Gmail service = new Gmail.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
-//				.setApplicationName("NotifyMe").build();
-//
-//		String user = "me";
-//		ListLabelsResponse listResponse = service.users().labels().list(user).execute();
-//		List<Label> labels = listResponse.getLabels();
-//		if (labels.size() == 0) {
-//			System.out.println("No labels found.");
-//		} else {
-//			System.out.println("Labels:");
-//		}
-//		for (Label label : labels) {
-//			System.out.printf("- %s\n", label.getName());
-//		}
-//		return labels;
-//	}
-	
+public class GmailTest {		
 	/**
 	 * Get Message with given ID.
 	 *
@@ -52,19 +20,20 @@ public class GmailAPI extends java.lang.Thread {
 	 * @return Message Retrieved Message.
 	 * @throws IOException
 	 */
-	public Message getMessage(Gmail service, String userId, String messageId) throws IOException {
-		List<String> metadataHeaders = new ArrayList<>();
-		metadataHeaders.add("From");
-		metadataHeaders.add("Subject");
-		Message message = service.users().messages().get(userId, messageId).setFormat("metadata").setMetadataHeaders(metadataHeaders).execute();
-//		Message message = service.users().messages().get("me", "162cd4d43129749e").setFormat("metadata").execute();
-		if (message == null) {
-			System.out.println("null message");
-		}
-		else {
-			System.out.println("not null message");
-			System.out.println(message.toPrettyString());
-		}
+	public static Message getMessage(Gmail service, String userId, String messageId) throws IOException {
+//	public Message getMessage(String messageId) throws IOException {
+//		GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
+//
+//		Gmail service = new Gmail.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
+//				.setApplicationName("NotifyMe").build();
+//		
+//		String userId = "me";
+		
+//		List<String> metadataHeaders = new ArrayList<>();
+//		metadataHeaders.add("From");
+//		metadataHeaders.add("Subject");
+//		Message message = service.users().messages().get(userId, messageId).setFormat("METADATA").setMetadataHeaders(metadataHeaders).execute();
+		Message message = service.users().messages().get(userId, messageId).execute();
 		System.out.println("Message snippet: " + message.getSnippet());
 		return message;
 	}
@@ -77,7 +46,7 @@ public class GmailAPI extends java.lang.Thread {
 	 * @param query String used to filter the Messages listed.
 	 * @throws IOException
 	 */
-	public List<Header> listMessages(String accessToken) throws IOException {
+	public static List<Header> listMessages(String accessToken) throws IOException {
 		GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
 
 		Gmail service = new Gmail.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
@@ -87,7 +56,7 @@ public class GmailAPI extends java.lang.Thread {
 		ListMessagesResponse response = service.users().messages().list(userId).setMaxResults((long) 8).execute();
 
 		List<Message> messages = new ArrayList<Message>();
-
+		
 		if (response.getMessages() != null) {
 			messages.addAll(response.getMessages());
 		}
@@ -101,32 +70,32 @@ public class GmailAPI extends java.lang.Thread {
 			System.out.println(messageId);
 			Message message = getMessage(service, userId, messageId);
 //			Message message = getMessage(messageId);
-//			int size = message.getPayload().getHeaders().size();
+			int size = message.getPayload().getHeaders().size();
 			String from = null;
 			String subject = null;
-			String snippet = null;
-//			String snippet = message.getSnippet();
+			String snippet = message.getSnippet();
 //			if (snippet.length() > 20) {
 //				snippet = (snippet.substring(0, 20) + "...");
 //			}
-			for (int j = 0; j < 2; j++) {
+			for (int j = 0; j < size; j++) {
 				String temp = message.getPayload().getHeaders().get(j).getName();
-				if (temp.equals("From")) {
-					from = message.getPayload().getHeaders().get(j).getValue();
+				if (temp == "From") {
+					from = temp;
 				}
-				else if (temp.equals("Subject")) {
-					subject = message.getPayload().getHeaders().get(j).getValue();
+				else if (temp == "Subject") {
+					subject = temp;
 				}
 			}
 			headers.add(new Header(from, subject, snippet));
-			System.out.println("message index " + i + " from " + from + " subject " + subject + " snippet " + snippet);
+			System.out.println("message index " +  " from " + from + " subject " + subject + " snippet " + snippet);
 		}
 		
 		return headers;
 	}
 
-	public void run() {
-		while (session.isOpen()) {
+	public static void main(String[] args) {
+		String accessToken = "ya29.GlufBc5lRDhfx1DO_3J-ybJCc5r6t4JwG53g3rKJSoUWmJ18W7k-KceTRR2K7W3rpegZb3aEad42alwgbHEG13ekLBpSjpliN35y4-FLxfquqVmdN6bDxjy30Piq";
+		while (true) {
 			try {
 //				List<Label> labels = listLabels(accessToken);
 				List<Header> headers = listMessages(accessToken);
@@ -135,8 +104,8 @@ public class GmailAPI extends java.lang.Thread {
 				String gson = json.toJson(headers);
 				String message = "Gmail|" + gson;
 //				session.getBasicRemote().sendText(message);
-				MainServer.sendUpdate(session, message);
-				java.lang.Thread.sleep(10000); // 10 seconds
+//				MainServer.sendUpdate(session, message);
+				java.lang.Thread.sleep(5000); // 10 seconds
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 				break;
