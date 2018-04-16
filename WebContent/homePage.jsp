@@ -213,8 +213,10 @@
 				var header = data[0];
 
 				if (header.includes("Twitter")) {
+					console.log('start twitter js function');
+					
 					var obj = JSON.parse(data[1]);
-					console.log(obj);
+					/* console.log(obj); */
 
 					var idNum = 0;
 					for ( var key in obj) {
@@ -232,10 +234,14 @@
 							idNum++;
 						}
 					}
+					
+					console.log('end twitter js function');
 				}
 				else if (header.includes("Weather")) {
+					console.log('start weather js function');
+					
 					var obj = JSON.parse(data[1]);
-					console.log(obj);
+					/* console.log(obj); */
 
 					var iconNum = obj.weather[0].icon;
 					var description = obj.weather[0].description;
@@ -262,16 +268,22 @@
 					var descriptionHeader = document.createElement("h1");
 					descriptionHeader.appendChild(descriptionElement);
 					weatherDiv.appendChild(descriptionHeader);
+					
+					console.log('end weather js function');
 				}
 				else if (header.includes("Gmail")) {
+					console.log('start gmail js function');
+					
 					var obj = JSON.parse(data[1]);
-					console.log(obj);
+					/* console.log(obj); */
 					
 					for (i = 0; i < 8; i++) {
 						$('#email_from_'+i).html(obj[i].from);
 						$('#subject_'+i).html(obj[i].subject);
 						$('#email_body_'+i).html(obj[i].snippet);
 					}
+					
+					console.log('end gmail js function');
 				}
 				else if (header.includes("Crypto")) {
 					var obj = JSON.parse(data[1]);

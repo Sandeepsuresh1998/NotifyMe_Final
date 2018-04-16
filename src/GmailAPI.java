@@ -58,14 +58,14 @@ public class GmailAPI extends java.lang.Thread {
 		metadataHeaders.add("Subject");
 //		Message message = service.users().messages().get(userId, messageId).setFormat("metadata").setMetadataHeaders(metadataHeaders).execute();
 		Message message = service.users().messages().get(userId, messageId).execute();
-		if (message == null) {
-			System.out.println("null message");
-		}
-		else {
-			System.out.println("not null message");
-			System.out.println(message.toPrettyString());
-		}
-		System.out.println("Message snippet: " + message.getSnippet());
+//		if (message == null) {
+//			System.out.println("null message");
+//		}
+//		else {
+//			System.out.println("not null message");
+//			System.out.println(message.toPrettyString());
+//		}
+//		System.out.println("Message snippet: " + message.getSnippet());
 		return message;
 	}
 	
@@ -91,14 +91,14 @@ public class GmailAPI extends java.lang.Thread {
 		if (response.getMessages() != null) {
 			messages.addAll(response.getMessages());
 		}
-		for (Message message : messages) {
-			System.out.println(message.toPrettyString());
-		}
+//		for (Message message : messages) {
+//			System.out.println(message.toPrettyString());
+//		}
 		
 		ArrayList<Header> headers = new ArrayList<Header>();
 		for (int i = 0; i < 8; i++) {
 			String messageId = messages.get(i).getId();
-			System.out.println(messageId);
+//			System.out.println(messageId);
 			Message message = getMessage(service, userId, messageId);
 //			Message message = getMessage(messageId);
 			int size = message.getPayload().getHeaders().size();
@@ -128,12 +128,15 @@ public class GmailAPI extends java.lang.Thread {
 	public void run() {
 		while (session.isOpen()) {
 			try {
+				System.out.println("start gmail");
+				
 //				List<Label> labels = listLabels(accessToken);
 				List<Header> headers = listMessages(accessToken);
 				Gson json = new Gson();
 //				String gson = json.toJson(labels);
 				String gson = json.toJson(headers);
 				String message = "Gmail|" + gson;
+				System.out.println("before sending gmail");
 //				session.getBasicRemote().sendText(message);
 				MainServer.sendUpdate(session, message);
 				java.lang.Thread.sleep(10000); // 10 seconds

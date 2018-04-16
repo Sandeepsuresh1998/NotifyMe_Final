@@ -21,7 +21,7 @@ public class MainServer {
 
 	@OnMessage
 	public void onMessage(String userId, Session session) {
-		System.out.println("in main server userId = " + userId);
+		System.out.println("in main server start loading widgets for userId " + userId);
 		// index 0 = twitter
 		// index 1 = gmail
 		// index 2 = weather

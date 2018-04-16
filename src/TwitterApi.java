@@ -23,8 +23,7 @@ public class TwitterApi extends Thread{
 		this.start();
 	}
 	
-	public HashMap<String, String> getTwitterTreading() throws TwitterException {
-		System.out.println("Twitter Run!");
+	public HashMap<String, String> getTwitterTreading() throws TwitterException {		
 		ConfigurationBuilder cBuilder = new ConfigurationBuilder();
 		
 		cBuilder.setDebugEnabled(true)
@@ -50,11 +49,13 @@ public class TwitterApi extends Thread{
 	public void run() {
 		while(mSession.isOpen()) {
 			try {
+				System.out.println("start twitter");
 				HashMap<String, String> twitterData = getTwitterTreading();
 				Gson gson = new Gson();
 				String twitterJson = gson.toJson(twitterData);
 				String data = "Twitter|" + twitterJson;
 //				mSession.getBasicRemote().sendText(data);
+				System.out.println("before sending twitter");
 				MainServer.sendUpdate(mSession, data);
 				Thread.sleep(20000); //Ten seconds 
 			} catch (TwitterException | InterruptedException | IOException e) {
