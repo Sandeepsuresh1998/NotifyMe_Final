@@ -28,7 +28,7 @@ public class MainServer {
 		// index 3 = calendar
 		// index 4 = youtube
 		// index 5 = stock
-		ArrayList<Boolean> widgets = DBController.getPreferences(userId);
+		ArrayList<Boolean> widgets = DBController.getWidgets(userId);
 		if (widgets.get(0)) {
 			TwitterApi tApi = new TwitterApi(session);
 		}

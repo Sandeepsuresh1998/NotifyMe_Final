@@ -123,11 +123,12 @@ public class DBController {
 	// index 0 = first name
 	// index 1 = last name
 	// index 2 = profile picture url
+	// index 3 = email
 	public static ArrayList<String> getUserInfo(String userId) {
 		connect();
 		ArrayList<String> UserInfo = null;
 		try {
-			ps = conn.prepareStatement("select givenName, familyName, pictureUrl from UserInfo where userId=?");
+			ps = conn.prepareStatement("select givenName, familyName, pictureUrl, email from UserInfo where userId=?");
 			ps.setString(1, userId);
 			rs = ps.executeQuery();
 			UserInfo = new ArrayList<>();
@@ -135,6 +136,7 @@ public class DBController {
 				UserInfo.add(rs.getString("givenName"));
 				UserInfo.add(rs.getString("familyName"));
 				UserInfo.add(rs.getString("pictureUrl"));
+				UserInfo.add(rs.getString("email"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQLException in function \"getUserInfo\"");
@@ -152,7 +154,7 @@ public class DBController {
 	// useWeather,
 	// boolean useCalendar, boolean useYouTube, boolean useStock
 	// return none
-	public static void updatePreferences(String userId, boolean useTwitter, boolean useGmail, boolean useWeather,
+	public static void updateWidgets(String userId, boolean useTwitter, boolean useGmail, boolean useWeather,
 			boolean useCalendar, boolean useYouTube, boolean useStock) {
 		connect();
 		try {
@@ -184,7 +186,7 @@ public class DBController {
 	// index 3 = calendar
 	// index 4 = youtube
 	// index 5 = stock
-	public static ArrayList<Boolean> getPreferences(String userId) {
+	public static ArrayList<Boolean> getWidgets(String userId) {
 		connect();
 		ArrayList<Boolean> preferences = null;
 		try {
