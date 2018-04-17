@@ -113,6 +113,8 @@ public class GmailAPI extends java.lang.Thread {
 				String temp = message.getPayload().getHeaders().get(j).getName();
 				if (temp.equals("From")) {
 					from = message.getPayload().getHeaders().get(j).getValue();
+					int end = from.indexOf("<");
+					from = from.substring(0, end-1);
 				}
 				else if (temp.equals("Subject")) {
 					subject = message.getPayload().getHeaders().get(j).getValue();
