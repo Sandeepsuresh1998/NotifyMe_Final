@@ -313,8 +313,13 @@
 				else if(header.includes("Calendar")){
 					console.log('start calendar js function');
 					document.getElementById("calendarBody").innerHTML="<ol>";
+					var obj = JSON.parse(data[1]);
 					for(i=0; i<obj.length; i++){
+						/* if(obj[i]==null){
+							break;
+						} */
 						document.getElementById("calendarBody").innerHTML += "<li>"+obj[i].event+"</li>"
+						console.log(obj[i].event);
 					}
 					document.getElementById("calendarBody").innerHTML+="</ol>";
 					console.log('end calendar js function');

@@ -1,8 +1,10 @@
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.websocket.Session;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
@@ -31,6 +33,7 @@ public class CalendarAPI extends Thread {
 			    .setApplicationName("NotifyMe").build();
 		start();
 	}
+	@SuppressWarnings("null")
 	public void run() {
 		System.out.println("Calendar API running");
 		while(session.isOpen()) {
@@ -43,7 +46,7 @@ public class CalendarAPI extends Thread {
 			
 			DateTime end = new DateTime(d+"T23:59:59-04:00");
 			String pageToken = null;
-			List<CalendarEvent> CalendarEvents = null;
+			List<CalendarEvent> CalendarEvents = new ArrayList<CalendarEvent>();
 			do {
 			  com.google.api.services.calendar.model.Events events = null;
 			try {
@@ -64,7 +67,12 @@ public class CalendarAPI extends Thread {
 			     System.out.println(event.getSummary());
 			     
 				  System.out.println(event.getEnd().getDateTime());
-				  CalendarEvents.add(ce);
+				  
+				  
+				  
+				  if(ce!=null) {
+					  CalendarEvents.add(ce);
+				  }
 			  }
 			  pageToken = events.getNextPageToken();
 			} while (pageToken != null);
