@@ -43,9 +43,9 @@ public class YouTubeAPI extends Thread {
 		start();
 	}
 	public void run(){
-		System.out.println("YouTube API Thread running");
 		//Use access token to call API
 		while(session.isOpen()) {
+			System.out.println("start youtube");
 			SubscriptionListResponse slr = getSubscription();
 			//System.out.println(slr);
 			List<String> subscriptionList = new ArrayList<String>();
@@ -66,15 +66,10 @@ public class YouTubeAPI extends Thread {
 			String gson = json.toJson(videoList);
 			String message = "YouTube|"+gson;
 			try {
+				System.out.println("before sending youtube");
 				MainServer.sendUpdate(session, message);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
 				java.lang.Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+			} catch (InterruptedException | IOException | IllegalStateException e) {
 				e.printStackTrace();
 			}
 		}

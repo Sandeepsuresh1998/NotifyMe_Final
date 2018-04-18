@@ -43,15 +43,6 @@ public class GmailAPI extends java.lang.Thread {
 //		return labels;
 //	}
 	
-	/**
-	 * Get Message with given ID.
-	 *
-	 * @param service Authorized Gmail API instance.
-	 * @param userId User's email address. The special value "me" can be used to indicate the authenticated user.
-	 * @param messageId ID of Message to retrieve.
-	 * @return Message Retrieved Message.
-	 * @throws IOException
-	 */
 	public Message getMessage(Gmail service, String userId, String messageId) throws IOException {
 		List<String> metadataHeaders = new ArrayList<>();
 		metadataHeaders.add("From");
@@ -69,14 +60,6 @@ public class GmailAPI extends java.lang.Thread {
 		return message;
 	}
 	
-	/**
-	 * List all Messages of the user's mailbox matching the query.
-	 *
-	 * @param service Authorized Gmail API instance.
-	 * @param userId User's email address. The special value "me" can be used to indicate the authenticated user.
-	 * @param query String used to filter the Messages listed.
-	 * @throws IOException
-	 */
 	public List<Header> listMessages(String accessToken) throws IOException {
 		GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
 
@@ -114,14 +97,19 @@ public class GmailAPI extends java.lang.Thread {
 				if (temp.equals("From")) {
 					from = message.getPayload().getHeaders().get(j).getValue();
 					int end = from.indexOf("<");
-					from = from.substring(0, end-1);
+					if (end != -1) {
+						from = from.substring(0, end);
+					}
+					if (from.equals(" ") || from == null || from.equals("")) {
+						from = "Unavailable";
+					}
 				}
 				else if (temp.equals("Subject")) {
 					subject = message.getPayload().getHeaders().get(j).getValue();
 				}
 			}
 			headers.add(new Header(from, subject, snippet));
-			System.out.println("message index " + i + " from " + from + " subject " + subject + " snippet " + snippet);
+//			System.out.println("message index " + i + " from " + from + " subject " + subject + " snippet " + snippet);
 		}
 		
 		return headers;
@@ -142,7 +130,7 @@ public class GmailAPI extends java.lang.Thread {
 //				session.getBasicRemote().sendText(message);
 				MainServer.sendUpdate(session, message);
 				java.lang.Thread.sleep(10000); // 10 seconds
-			} catch (IOException | InterruptedException e) {
+			} catch (IOException | InterruptedException | IllegalStateException e) {
 				e.printStackTrace();
 				break;
 			}

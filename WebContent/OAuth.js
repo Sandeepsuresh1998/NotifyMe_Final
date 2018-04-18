@@ -48,7 +48,7 @@ function trySampleRequest() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "TokenValidation?accessToken=" + accessToken, false);
 		xhttp.send();
-		localStorage.removeItem('oauth2-test-params');
+//		localStorage.removeItem('oauth2-test-params');
 	} else {
 		console.log('no access token');
 		oauth2SignIn();
