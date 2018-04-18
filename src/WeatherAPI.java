@@ -31,7 +31,8 @@ public class WeatherAPI extends Thread{
 //		        System.out.println(response);
 		        String weatherData = "Weather|" + response;
 		        System.out.println("before sending twitter");
-		        mSession.getBasicRemote().sendText(weatherData);
+//		        mSession.getBasicRemote().sendText(weatherData);
+		        MainServer.sendUpdate(mSession, weatherData);
 		        Thread.sleep(600000);
 			} catch (IOException | InterruptedException | IllegalStateException e) {
 				e.printStackTrace();
