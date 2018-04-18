@@ -33,7 +33,7 @@ public class WeatherAPI extends Thread{
 		        System.out.println("before sending twitter");
 //		        mSession.getBasicRemote().sendText(weatherData);
 		        MainServer.sendUpdate(mSession, weatherData);
-		        Thread.sleep(600000);
+		        Thread.sleep(600000);  // 600 seconds
 			} catch (IOException | InterruptedException | IllegalStateException e) {
 				e.printStackTrace();
 			}

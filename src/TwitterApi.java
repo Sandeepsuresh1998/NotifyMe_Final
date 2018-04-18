@@ -58,7 +58,7 @@ public class TwitterApi extends Thread{
 				System.out.println("before sending twitter");
 				MainServer.sendUpdate(mSession, data);
 				Thread.sleep(20000); //Ten seconds 
-			} catch (TwitterException | InterruptedException | IOException e) {
+			} catch (TwitterException | InterruptedException e) {
 				e.printStackTrace();
 				break;
 			}

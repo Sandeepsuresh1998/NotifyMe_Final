@@ -98,8 +98,12 @@ public class MainServer {
 		// }
 	}
 	
-	synchronized public static void sendUpdate(Session session, String content) throws IOException {
-		session.getBasicRemote().sendText(content);
+	synchronized public static void sendUpdate(Session session, String content) {
+		try {
+			session.getBasicRemote().sendText(content);
+		} catch (IOException e) {
+			System.out.println("tab closed when sending updates, stop sending and disconnect");
+		}
 	}
 
 	@OnClose

@@ -69,7 +69,7 @@ public class YouTubeAPI extends Thread {
 				System.out.println("before sending youtube");
 				MainServer.sendUpdate(session, message);
 				java.lang.Thread.sleep(10000);
-			} catch (InterruptedException | IOException | IllegalStateException e) {
+			} catch (InterruptedException | IllegalStateException e) {
 				e.printStackTrace();
 			}
 		}

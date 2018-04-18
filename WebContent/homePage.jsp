@@ -196,13 +196,15 @@
 
 	<script>
 		function loadWidgets() {
-			var userId = localStorage.getItem('userId');
-			console.log("start connection for userid " + userId);
+			/* var userId = localStorage.getItem('userId'); */
+			/* console.log("start connection for userid " + userId); */
+			console.log("starting connection");
 			socket = new WebSocket("ws://localhost:8080/NotifyMe_Final/ws");
 			// on open
 			socket.onopen = function(event) {
 				/* socket.send(userId); */
-				console.log("Connection established for userid " + userId);
+				/* console.log("Connection established for userid " + userId); */
+				console.log("Connection established");
 			}
 			
 			// on message

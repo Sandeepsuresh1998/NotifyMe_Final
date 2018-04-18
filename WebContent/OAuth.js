@@ -4,7 +4,7 @@
 
 function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
-	localStorage.setItem('userId', profile.getId());
+//	localStorage.setItem('userId', profile.getId());
 	var token = googleUser.getAuthResponse().id_token;
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:8080/NotifyMe_Final/LoginServlet');
@@ -14,7 +14,6 @@ function onSignIn(googleUser) {
 	// };
 	console.log('token = ' + token);
 	xhr.send('token=' + token)
-
 }
 
 var YOUR_CLIENT_ID = '496920584851-fmjavghisqpvdb9i0s0cs08q5fuvo63u.apps.googleusercontent.com';
@@ -48,7 +47,7 @@ function trySampleRequest() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "TokenValidation?accessToken=" + accessToken, false);
 		xhttp.send();
-//		localStorage.removeItem('oauth2-test-params');
+		localStorage.removeItem('oauth2-test-params');
 	} else {
 		console.log('no access token');
 		oauth2SignIn();

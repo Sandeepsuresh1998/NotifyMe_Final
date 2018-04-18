@@ -85,6 +85,7 @@ public class GmailAPI extends java.lang.Thread {
 			Message message = getMessage(service, userId, messageId);
 //			Message message = getMessage(messageId);
 			int size = message.getPayload().getHeaders().size();
+//			System.out.println("size " + size);
 			String from = null;
 			String subject = null;
 //			String snippet = null;
