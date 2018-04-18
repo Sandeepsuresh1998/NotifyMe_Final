@@ -13,7 +13,7 @@ function onSignIn(googleUser) {
 	// console.log('Signed in as: ' + xhr.responseText);
 	// };
 	console.log('token = ' + token);
-	xhr.send('token=' + token)
+	xhr.send('token=' + token);
 }
 
 var YOUR_CLIENT_ID = '496920584851-fmjavghisqpvdb9i0s0cs08q5fuvo63u.apps.googleusercontent.com';
@@ -128,6 +128,7 @@ function revokeAccess() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", requeststr, false);
 	xhttp.send();
+	localStorage.removeItem('oauth2-test-params');
 }
 
 function toHomePage() {
@@ -138,5 +139,6 @@ function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function() {
 		console.log('User signed out.');
+		localStorage.removeItem('oauth2-test-params');
 	});
 }
