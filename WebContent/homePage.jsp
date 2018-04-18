@@ -134,7 +134,7 @@
 				<div class="col-md-4">
 					<div class="card mb-4 box-shadow">
 						<div class="card-body">
-							<h5 class="card-title">Calendar</h5>
+							<h5 class="card-title">Todo Today</h5>
 							<p class="card-text">
 							<div id="calendarBody">{{INSERT GOOGLE CALENDAR}}</div>
 							</p>
