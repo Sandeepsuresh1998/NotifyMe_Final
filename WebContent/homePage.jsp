@@ -267,8 +267,7 @@
 					weatherDiv.appendChild(tempHeader);
 
 					//Get Description
-					var descriptionElement = document
-							.createTextNode(description)
+					var descriptionElement = document.createTextNode(description)
 					var descriptionHeader = document.createElement("h1");
 					descriptionHeader.appendChild(descriptionElement);
 					weatherDiv.appendChild(descriptionHeader);
