@@ -8,7 +8,7 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="OAuth.js"></script>
 <meta name="google-signin-client_id"
-	content="496920584851-fmjavghisqpvdb9i0s0cs08q5fuvo63u.apps.googleusercontent.com">
+	content="943857468024-saaqgfpqu23qqlnc7ce0i5nok6na6tif.apps.googleusercontent.com">
 </head>
 <body>
 	<!--

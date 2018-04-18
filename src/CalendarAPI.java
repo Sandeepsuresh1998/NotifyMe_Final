@@ -1,11 +1,14 @@
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
-
+import java.util.Date;
 import javax.websocket.Session;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.gson.Gson;
@@ -32,12 +35,23 @@ public class CalendarAPI extends Thread {
 		System.out.println("Calendar API running");
 		while(session.isOpen()) {
 			// Iterate over the events in the specified calendar
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			String d = dateFormat.format(date);
+			System.out.println(d);
+			DateTime start = new DateTime(d+"T00:00:00-04:00");
+			
+			DateTime end = new DateTime(d+"T23:59:59-04:00");
 			String pageToken = null;
 			List<CalendarEvent> CalendarEvents = null;
 			do {
 			  com.google.api.services.calendar.model.Events events = null;
 			try {
-				events = service.events().list("primary").setPageToken(pageToken).execute();
+				events = service.events().list("primary")
+							.setPageToken(pageToken)
+							.setTimeMin(start)
+							.setTimeMax(end)
+							.execute();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -60,7 +74,7 @@ public class CalendarAPI extends Thread {
 			String message = "Calendar|"+gson;
 			try {
 				MainServer.sendUpdate(session, message);
-				java.lang.Thread.sleep(10000);
+				java.lang.Thread.sleep(1000000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

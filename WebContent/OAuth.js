@@ -16,7 +16,7 @@ function onSignIn(googleUser) {
 	xhr.send('token=' + token);
 }
 
-var YOUR_CLIENT_ID = '496920584851-fmjavghisqpvdb9i0s0cs08q5fuvo63u.apps.googleusercontent.com';
+var YOUR_CLIENT_ID = '943857468024-saaqgfpqu23qqlnc7ce0i5nok6na6tif.apps.googleusercontent.com';
 var YOUR_REDIRECT_URI = 'http://localhost:8080/NotifyMe_Final/Login.jsp';
 var queryString = location.hash.substring(1);
 var accessToken = null;
@@ -74,7 +74,8 @@ function oauth2SignIn() {
 			'https://mail.google.com/ ' + 
 //			'https://www.googleapis.com/auth/gmail.metadata ' + 
 			'https://www.googleapis.com/auth/gmail.modify ' + 
-			'https://www.googleapis.com/auth/gmail.readonly',
+			'https://www.googleapis.com/auth/gmail.readonly '+
+			'https://www.googleapis.com/auth/calendar',
 		'state' : 'try_sample_request',
 		'include_granted_scopes' : 'true',
 		'response_type' : 'token'

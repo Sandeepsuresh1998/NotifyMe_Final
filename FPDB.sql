@@ -1,4 +1,4 @@
--- drop database if exists FPDB;
+drop database if exists FPDB;
 create database FPDB;
 use FPDB;
 

@@ -295,6 +295,30 @@
 					
 					//Put Crypto in its own div
 				}
+				else if(header.includes("YouTube")){
+					console.log('start youtube js function');
+					
+					var obj = JSON.parse(data[1]);
+					for(i=0; i<6; i++){
+						if(obj[i]){
+							console.log(obj[i]);
+							document.getElementById("video_"+i).innerHTML='<iframe width="150" height="100" src='+obj[i]+'></iframe>';
+						}
+						else{
+							break;
+						}
+					}
+					console.log('end youtube js function');
+				}
+				else if(header.includes("Calendar")){
+					console.log('start calendar js function');
+					document.getElementById("calendarBody").innerHTML="<ol>";
+					for(i=0; i<obj.length; i++){
+						document.getElementById("calendarBody").innerHTML += "<li>"+obj[i].event+"</li>"
+					}
+					document.getElementById("calendarBody").innerHTML+="</ol>";
+					console.log('end calendar js function');
+				}
 
 			}
 				

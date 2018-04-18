@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final HttpTransport transport = new NetHttpTransport();
 	private static final JacksonFactory jsonFactory = new JacksonFactory();
-	private static final String clientID = "496920584851-fmjavghisqpvdb9i0s0cs08q5fuvo63u.apps.googleusercontent.com";
+	private static final String clientID = "943857468024-saaqgfpqu23qqlnc7ce0i5nok6na6tif.apps.googleusercontent.com";
        
     /**
      * @see HttpServlet#HttpServlet()
