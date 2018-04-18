@@ -228,8 +228,8 @@
 							var twitterURL = obj[key];
 							var tweet_div = document.getElementById("tweet_" + idNum);
 							//Clearing the node for when it refreshes
-							while(tweet_div.hasChildNode()) {
-								tweet_div.removeChild();
+							while(tweet_div.hasChildNodes()) {
+								tweet_div.removeChild(tweet_div.firstChild);
 							}
 							var anchorTag = document.createElement("a");
 							anchorTag.innerHTML = twitterName;
