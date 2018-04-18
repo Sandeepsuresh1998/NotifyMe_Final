@@ -39,7 +39,7 @@ public class MainServer {
 			WeatherAPI wApi = new WeatherAPI(session);
 		}
 		if (widgets.get(3)) {
-
+			
 		}
 		if (widgets.get(4)) {
 			

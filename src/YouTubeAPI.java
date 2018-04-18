@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.websocket.Session;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -10,6 +12,7 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.PlaylistItemListResponse;
 import com.google.api.services.youtube.model.SubscriptionListResponse;
+import com.google.gson.Gson;
 
 /**
  * 
@@ -23,10 +26,13 @@ public class YouTubeAPI extends Thread {
 	//private String accessToken;
 	private GoogleCredential credential;
 	private YouTube youtube;
+	private Session session;
+	
 	/**
 	 * 
 	 */
-	public YouTubeAPI(String accessToken) {
+	public YouTubeAPI(Session s, String accessToken) {
+		this.session = s;
 		System.out.println("In YouTube API Thread");
 		// TODO Auto-generated constructor stub
 		//this.accessToken = accessToken;
@@ -39,22 +45,40 @@ public class YouTubeAPI extends Thread {
 	public void run(){
 		System.out.println("YouTube API Thread running");
 		//Use access token to call API
-		SubscriptionListResponse slr = getSubscription();
-		//System.out.println(slr);
-		List<String> subscriptionList = new ArrayList<String>();
-		List<String> videoList = new ArrayList<String>();
-		int subscriptionNumber = 5;
-		if(subscriptionNumber>slr.getItems().size()) {
-			subscriptionNumber = slr.getItems().size();
+		while(session.isOpen()) {
+			SubscriptionListResponse slr = getSubscription();
+			//System.out.println(slr);
+			List<String> subscriptionList = new ArrayList<String>();
+			List<String> videoList = new ArrayList<String>();
+			int subscriptionNumber = 5;
+			if(subscriptionNumber>slr.getItems().size()) {
+				subscriptionNumber = slr.getItems().size();
+			}
+			for(int i=0; i<subscriptionNumber; i++) {
+				System.out.println(i);
+				//System.out.println(slr.getItems().get(i).getSnippet().getTitle());
+				String channelId = slr.getItems().get(i).getSnippet().getResourceId().getChannelId();
+				String firstVideoId = "https://www.youtube.com/watch?v="+getFirstVideoIdFromAChannel(channelId);
+				System.out.println(firstVideoId);
+				videoList.add(firstVideoId);
+			}
+			Gson json = new Gson();
+			String gson = json.toJson(videoList);
+			String message = "YouTube|"+gson;
+			try {
+				MainServer.sendUpdate(session, message);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				java.lang.Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		for(int i=0; i<subscriptionNumber; i++) {
-			System.out.println(i);
-			//System.out.println(slr.getItems().get(i).getSnippet().getTitle());
-			String channelId = slr.getItems().get(i).getSnippet().getResourceId().getChannelId();
-			String firstVideoId = "https://www.youtube.com/watch?v="+getFirstVideoIdFromAChannel(channelId);
-			System.out.println(firstVideoId);
-			videoList.add(firstVideoId);
-		}
+		
 		
 	}
 	
