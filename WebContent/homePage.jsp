@@ -227,6 +227,10 @@
 							var twitterName = key;//Name of twitter object
 							var twitterURL = obj[key];
 							var tweet_div = document.getElementById("tweet_" + idNum);
+							//Clearing the node for when it refreshes
+							while(tweet_div.hasChildNode()) {
+								tweet_div.removeChild();
+							}
 							var anchorTag = document.createElement("a");
 							anchorTag.innerHTML = twitterName;
 							anchorTag.href = twitterURL;
