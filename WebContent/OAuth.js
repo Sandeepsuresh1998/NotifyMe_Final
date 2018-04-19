@@ -1,25 +1,27 @@
-/**
- * 
- */
-
-function onSignIn(googleUser) {
-	var profile = googleUser.getBasicProfile();
-//	localStorage.setItem('userId', profile.getId());
-	var token = googleUser.getAuthResponse().id_token;
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8080/NotifyMe_Final/LoginServlet');
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	// xhr.onload = function() {
-	// console.log('Signed in as: ' + xhr.responseText);
-	// };
-	console.log('token = ' + token);
-	xhr.send('token=' + token);
-}
+//function onSignIn(googleUser) {
+//	var profile = googleUser.getBasicProfile();
+////	localStorage.setItem('userId', profile.getId());
+//	var token = googleUser.getAuthResponse().id_token;
+//	var xhr = new XMLHttpRequest();
+//	xhr.open('POST', 'http://localhost:8080/NotifyMe_Final/LoginServlet');
+//	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//	// xhr.onload = function() {
+//	// console.log('Signed in as: ' + xhr.responseText);
+//	// };
+//	console.log('token = ' + token);
+//	xhr.send('token=' + token);
+//}
 
 var YOUR_CLIENT_ID = '943857468024-saaqgfpqu23qqlnc7ce0i5nok6na6tif.apps.googleusercontent.com';
 var YOUR_REDIRECT_URI = 'http://localhost:8080/NotifyMe_Final/Login.jsp';
 var queryString = location.hash.substring(1);
 var accessToken = null;
+var userId = null;
+var email = null;
+var given_name = null;
+var family_name = null;
+var picture = null;
+
 // console.log(queryString);
 
 // Parse query string to see if page request is coming from OAuth 2.0 server.
@@ -45,9 +47,18 @@ function trySampleRequest() {
 		accessToken = params['access_token'];
 		console.log('access token ' + accessToken);
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "TokenValidation?accessToken=" + accessToken, false);
+//		xhttp.open("POST", "TokenValidation?accessToken=" + accessToken, false);
+		xhttp.open("POST", "TokenValidation?userId=" + userId + 
+				"&accessToken=" + accessToken + 
+				"&userId=" + userId + 
+				"&email=" + email + 
+				"&given_name=" + given_name + 
+				"&family_name=" + family_name + 
+				"&picture=" + picture
+				, false);
 		xhttp.send();
 		localStorage.removeItem('oauth2-test-params');
+//		localStorage.removeItem('userId');
 	} else {
 		console.log('no access token');
 		oauth2SignIn();
@@ -71,6 +82,8 @@ function oauth2SignIn() {
 		'client_id' : YOUR_CLIENT_ID,
 		'redirect_uri' : YOUR_REDIRECT_URI,
 		'scope' : 'https://www.googleapis.com/auth/youtube.force-ssl ' + 
+			'https://www.googleapis.com/auth/userinfo.profile ' + 
+			'https://www.googleapis.com/auth/userinfo.email ' + 
 			'https://mail.google.com/ ' + 
 //			'https://www.googleapis.com/auth/gmail.metadata ' + 
 			'https://www.googleapis.com/auth/gmail.modify ' + 
@@ -112,6 +125,15 @@ function exchangeOAuth2Token(params) {
 				// incremental authorization.
 				params['scope'] = response['scope'];
 				localStorage.setItem('oauth2-test-params', JSON.stringify(params));
+				
+				userId = response['sub'];
+				email = response['email'];
+				given_name = response['given_name'];
+				family_name = response['family_name'];
+				picture = response['picture'];
+				
+				console.log('in exchange oauth token userId ' + userId + ' picture ' + picture);
+//				localStorage.setItem('userId', response['sub']);
 				if (params['state'] == 'try_sample_request') {
 					trySampleRequest();
 				}

@@ -35,16 +35,40 @@ public class TokenValidation extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+//		String accessToken = request.getParameter("accessToken");
+//		System.out.println("In TokenValidation access token " + accessToken);
+//
+//		HttpSession hs = request.getSession(false);
+//		String userId = (String) hs.getAttribute("userId");
+//		System.out.println("in token validation user id " + hs.getAttribute("userId"));
+//		
+//		DBController.addAccessToken(userId, accessToken);
+//		System.out.println("in token validation access token " + DBController.getAccessToken(userId));
+		
+		String userId = request.getParameter("userId");
 		String accessToken = request.getParameter("accessToken");
 		System.out.println("In TokenValidation access token " + accessToken);
 
-		HttpSession hs = request.getSession(false);
-		String userId = (String) hs.getAttribute("userId");
+		if (DBController.isReturningUser(userId)) {
+			System.out.println("in token validation This is a returning user");
+		}
+		else {
+			String email = request.getParameter("email");
+			String pictureUrl = request.getParameter("picture");
+			String familyName = request.getParameter("family_name");
+			String givenName = request.getParameter("given_name");
+			System.out.println("in token validation This is a new user");
+			
+			DBController.signUpNewUser(userId, givenName, familyName, pictureUrl, email);
+		}
+		
+		HttpSession hs = request.getSession(true);
+		hs.setAttribute("userId", userId);
+		
 		System.out.println("in token validation user id " + hs.getAttribute("userId"));
 		
 		DBController.addAccessToken(userId, accessToken);
 		System.out.println("in token validation access token " + DBController.getAccessToken(userId));
-		
 
 		// YoutubeAPI myYouTubeAPI = new YoutubeAPI(accessToken);
 
