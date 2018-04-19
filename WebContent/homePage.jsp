@@ -40,161 +40,154 @@
 		</nav>
 	</header>
 
-	<main role="main">
-
-	<div class="album py-5 bg-light">
-		<div class="container">
-
-			<div class="row">
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body">
-							<p class="card-text">YouTube</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
-								<div class="input-group mb-2 mr-sm-2">
-									<div class="input-group-prepend">
-										<a><div class="input-group-text">
-												<i class="material-icons">search</i>
-											</div></a>
-									</div>
-									<input type="text" class="form-control"
-										id="inlineFormInputGroupUsername2" placeholder="Search">
-								</div>
-								<%
-									for (int i = 0; i < 6; i += 2) {
-								%>
-								<div class="row">
-									<div class="col-sm-6" id="video_<%=i%>"></div>
-									<div class="col-sm-6" id="video_<%=i + 1%>"></div>
-								</div>
-								<%
-									}
-								%>
-								<br /> <small class="text-muted">9 mins</small>
-							</div>
+	<main role="main"> <main role="main">
+	<div class="container">
+		<div id="grid">
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">YouTube</h5>
+					<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
+					<div class="input-group mb-2 mr-sm-2">
+						<button
+							class="input-group-prepend btn btn-secondary no_border_radius_right">
+							<i class="material-icons">search</i>
+						</button>
+						<input type="text" class="form-control"
+							id="inlineFormInputGroupUsername2" placeholder="Search">
+					</div>
+					<%
+							for (int i = 0; i < 5; i++) {
+						%>
+					<div class="row">
+						<div class="col-sm-12 videowrapper" id="video_<%=i%>">
+							<iframe
+								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
+							</iframe>
+							{{VIDEO
+							<%=i%>}}
 						</div>
 					</div>
+					<%
+							}
+						%>
 				</div>
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body">
-							<p class="card-text">Twitter</p>
-							<%
-								for (int i = 0; i < 10; i++) {
-							%>
-							<div class="row tweetRow">
-								<div class="col-sm-2">
-									#<%=i + 1%>
-								</div>
-								<div class="col-sm-10" id="tweet_<%=i%>"></div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Gmail</h5>
+					<%
+							for (int i = 0; i < 8; i++) {
+						%>
+					<div class="row mail_row">
+						<div class="col-sm-5 mail_from_subject">
+							<div class="row ">
+								<div class="col-sm-6">From :</div>
+								<div class="col-sm-6" id="email_from_<%=i%>">{{NAME}}</div>
 							</div>
-							<%
+							<div class="row">
+								<div class="col-sm-6">Subject :</div>
+								<div class="col-sm-6" id="subject_<%=i%>">{{SUBJECT}}</div>
+							</div>
+						</div>
+						<div
+							class="col-sm-2 d-flex justify-content-center align-items-center">
+							<div class="vl"></div>
+						</div>
+						<div class="col-sm-5">
+							<div id="email_body_<%=i%>">{{MESSAGE BODY}}</div>
+						</div>
+
+					</div>
+					<%
+							}
+						%>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Calendar</h5>
+					<div id="calendarBody">{{INSERT GOOGLE CALENDAR}}</div>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">CNN</h5>
+					<%
+							for (int i = 0; i < 5; i++) {
+						%>
+					<div id="story_<%=i%>">
+						<div class="row">
+							<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
+							<div class="col-sm-12" id="author_<%=i%>">{{AUTHOR}}</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12" id="preview_text_<%=i%>">{{STORY
+								DECSRIPTION}}</div>
+						</div>
+					</div>
+					<%
+							}
+						%>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Weather</h5>
+					<div class="weatherBody">
+						<div class="row">
+							<div class="col-sm-4" id="current_weather_today">{{CURRENT
+								WEATHER}}</div>
+							<div class="col-sm-4" id="weather_picture_today">{{WEATHER
+								PICTURE}}</div>
+							<div class="col-sm-4" id="current_temperature_today">{{CURRENT
+								TEMPERATURE}}</div>
+						</div>
+						<%
+								for (int i = 0; i < 7; i++) {
+							%>
+						<div class="row forecast">
+							<div class="col-sm-4" id="current_weather_<%=i%>">{{CURRENT
+								WEATHER}}</div>
+							<div class="col-sm-4" id="weather_picture_<%=i%>">{{WEATHER
+								PICTURE}}</div>
+							<div class="col-sm-2" id="temp_lo_<%=i%>">{{TEMP LO }}</div>
+							<div class="col-sm-2" id="temp_hi_<%=i%>">{{TEMP HI }}</div>
+						</div>
+						<%
 								}
 							%>
-							<small class="text-muted">9 mins</small>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body gmail_body">
-							<h5 class="card-title">Gmail</h5>
-							<%
-								for (int i = 0; i < 8; i++) {
-							%>
-							<div class="row mail_row">
-								<div class="col-sm-5 mail_from_subject">
-									<div class="row ">
-										<div class="col-sm-6">From :</div>
-										<div class="col-sm-6" id="email_from_<%=i%>">{{NAME}}</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-6">Subject :</div>
-										<div class="col-sm-6" id="subject_<%=i%>">{{SUBJECT}}</div>
-									</div>
-								</div>
-								<div class="col-sm-2">
-									<div class="vl"></div>
-								</div>
-								<div class="col-sm-5">
-									<div id="email_body_<%=i%>">{{MESSAGE BODY}}</div>
-								</div>
-
-							</div>
-							<%
-								}
-							%>
-							<div class="d-flex justify-content-between align-items-center">
-								<small class="text-muted">9 mins</small>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body">
-							<h5 class="card-title">Todo Today</h5>
-							<p class="card-text">
-							<div id="calendarBody">{{INSERT GOOGLE CALENDAR}}</div>
-							</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								</div>
-								<small class="text-muted">9 mins</small>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body">
-							<h5 class="card-title">CNN</h5>
-							<%
-								for (int i = 0; i < 5; i++) {
-							%>
-							<div id="story_<%=i%>">
-								<div class="row">
-									<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
-									<div class="col-sm-12" id="author_<%=i%>">{{AUTHOR}}</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12" id="preview_text_<%=i%>">{{STORY
-										DECSRIPTION}}</div>
-								</div>
-							</div>
-							<%
-								}
-							%>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<div class="card-body">
-							<h5 class="card-title">Weather</h5>
-							<p class="card-text">
-							<div id="weatherBody"></div>
-							</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								</div>
-								<small class="text-muted">9 mins</small>
-							</div>
-						</div>
+						<div class=" row black_border_top"></div>
 					</div>
 				</div>
 			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Twitter</h5>
+					<%
+							for (int i = 0; i < 10; i++) {
+						%>
+					<div class="row tweetRow">
+						<div class="col-sm-2">
+							#<%=i + 1%>
+						</div>
+						<div class="col-sm-10" id="tweet_<%=i%>"></div>
+					</div>
+					<%
+							}
+						%>
+					<small class="text-muted">9 mins</small>
+				</div>
+			</div>
 		</div>
-	</div>
-
-	</main>
-
+	</main> <script
+		src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 	<script>
+	$(function() {
+	    $('#grid').masonry({
+	        itemSelector: '.grid-item',
+	        isFitWidth: true
+	    });
+	});
 		function loadWidgets() {
 			/* var userId = localStorage.getItem('userId'); */
 			/* console.log("start connection for userid " + userId); */
@@ -340,20 +333,14 @@
 		function kelvinToFahrenheit(temp) {
 			return (temp * (9.0 / 5.0) - 459.67);
 		}
-	</script>
-	<footer class="text-muted"> </footer>
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
+	</script> <footer class="text-muted"> </footer> <!-- Bootstrap core JavaScript
+    ================================================== --> <!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
+		crossorigin="anonymous"></script> <script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
+		crossorigin="anonymous"></script> <script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
