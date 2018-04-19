@@ -17,8 +17,8 @@
 	-->
 
 	<!-- Googles own class for their sign in button -->
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-	<a href="#" onclick="signOut();">Sign out</a>
+	<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+	<!-- <a href="#" onclick="signOut();">Sign out</a> -->
 
 	<button onclick="trySampleRequest();">Get Access</button>
 	<button onclick="toHomePage();">Continue to Home Page</button>
