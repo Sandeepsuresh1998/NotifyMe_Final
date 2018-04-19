@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta name="google-signin-client_id"
-	content="943857468024-saaqgfpqu23qqlnc7ce0i5nok6na6tif.apps.googleusercontent.com">
+	content="496920584851-fmjavghisqpvdb9i0s0cs08q5fuvo63u.apps.googleusercontent.com">
 	
 	<style>
 		#login {
@@ -54,8 +54,8 @@
 	<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 	<!-- <a href="#" onclick="signOut();">Sign out</a> -->
 	<div class="flex-container">
-		<button id ="login" onclick="trySampleRequest();">Get Access</button>
-		<button id = "home" onclick="toHomePage();">Home Page</button>
+		<button id ="login" onclick="trySampleRequest();">Login</button>
+		<button id = "home" onclick="toHomePage();">Continue to Home Page</button>
 	</div>
 	
 	<!-- <button onclick="revokeAccess();">Revoke Access</button> -->

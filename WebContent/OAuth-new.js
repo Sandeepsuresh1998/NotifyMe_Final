@@ -18,24 +18,35 @@ var queryString = location.hash.substring(1);
 var accessToken = null;
 var userId = null;
 var email = null;
-//var given_name = null;
-//var family_name = null;
-//var picture = null;
-
-// console.log(queryString);
+var given_name = null;
+var family_name = null;
+var picture = null;
 
 // Parse query string to see if page request is coming from OAuth 2.0 server.
 var params = {};
 var regex = /([^&=]+)=([^&]*)/g, m;
-var flag = false;
 while (m = regex.exec(queryString)) {
-	/* console.log(decodeURIComponent(m[1])+" "+decodeURIComponent(m[2])); */
 	params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-	flag = true;
-}
-if (flag == true) {
 	// Try to exchange the param values for an access token.
 	exchangeOAuth2Token(params);
+}
+
+// If there's an access token, try an API request.
+// Otherwise, start OAuth 2.0 flow.
+function trySampleRequest() {
+	var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
+	if (params && params['access_token']) {
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET',
+				'https://www.googleapis.com/drive/v3/about?fields=user&'
+						+ 'access_token=' + params['access_token']);
+		xhr.onreadystatechange = function(e) {
+			console.log(xhr.response);
+		};
+		xhr.send(null);
+	} else {
+		oauth2SignIn();
+	}
 }
 
 // If there's an access token, try an API request.
@@ -50,12 +61,11 @@ function trySampleRequest() {
 //		xhttp.open("POST", "TokenValidation?accessToken=" + accessToken, false);
 		xhttp.open("POST", "TokenValidation?userId=" + userId + 
 				"&accessToken=" + accessToken + 
-				"&userId=" + userId +
-				"&email=" + email
-//				"&email=" + email + 
-//				"&given_name=" + given_name + 
-//				"&family_name=" + family_name + 
-//				"&picture=" + picture
+				"&userId=" + userId + 
+				"&email=" + email + 
+				"&given_name=" + given_name + 
+				"&family_name=" + family_name + 
+				"&picture=" + picture
 				, false);
 		xhttp.send();
 		localStorage.removeItem('oauth2-test-params');
@@ -83,7 +93,6 @@ function oauth2SignIn() {
 		'client_id' : YOUR_CLIENT_ID,
 		'redirect_uri' : YOUR_REDIRECT_URI,
 		'scope' : 'https://www.googleapis.com/auth/youtube.force-ssl ' + 
-			'https://www.googleapis.com/auth/plus.me ' + 
 			'https://www.googleapis.com/auth/userinfo.profile ' + 
 			'https://www.googleapis.com/auth/userinfo.email ' + 
 			'https://mail.google.com/ ' + 
@@ -122,24 +131,22 @@ function exchangeOAuth2Token(params) {
 			var response = JSON.parse(xhr.response);
 			// When request is finished, verify that the 'aud' property in the
 			// response matches YOUR_CLIENT_ID.
-			if (xhr.readyState == 4 && 
-					xhr.status == 200 && 
-					response['aud'] && 
-					response['aud'] == YOUR_CLIENT_ID) {
+			if (xhr.readyState == 4 && xhr.status == 200 && response['aud'] && response['aud'] == YOUR_CLIENT_ID) {
 				// Store granted scopes in local storage to facilitate
 				// incremental authorization.
 				params['scope'] = response['scope'];
 				localStorage.setItem('oauth2-test-params', JSON.stringify(params));
 				
+				console.log('after setting oauth local storage')
 				userId = response['sub'];
 				email = response['email'];
-//				given_name = response['given_name'];
-//				family_name = response['family_name'];
-//				picture = response['picture'];
+				given_name = response['given_name'];
+				family_name = response['family_name'];
+				picture = response['picture'];
 				
-				console.log('in exchange oauth token userId ' + userId + ' email ' + email);
+				console.log('in exchange oauth token userId ' + userId + ' picture ' + picture);
 //				localStorage.setItem('userId', response['sub']);
-				if (params['state'] == 'try_sample_request') {					
+				if (params['state'] == 'try_sample_request') {
 					trySampleRequest();
 				}
 			} else if (xhr.readyState == 4) {
