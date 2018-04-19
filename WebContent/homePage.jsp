@@ -24,6 +24,9 @@
 <link href="main.css" rel="stylesheet">
 </head>
 <body onload="loadWidgets()">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
 	<header>
 		<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
 			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="homePage.jsp">
@@ -39,8 +42,7 @@
 			</ul>
 		</nav>
 	</header>
-
-	<main role="main"> <main role="main">
+	<main role="main">
 	<div class="container">
 		<div id="grid">
 			<div class="grid-item">
@@ -56,8 +58,8 @@
 							id="inlineFormInputGroupUsername2" placeholder="Search">
 					</div>
 					<%
-							for (int i = 0; i < 5; i++) {
-						%>
+						for (int i = 0; i < 5; i++) {
+					%>
 					<div class="row">
 						<div class="col-sm-12 videowrapper" id="video_<%=i%>">
 							<iframe
@@ -68,16 +70,16 @@
 						</div>
 					</div>
 					<%
-							}
-						%>
+						}
+					%>
 				</div>
 			</div>
 			<div class="grid-item">
 				<div class="card-body">
 					<h5 class="card-title">Gmail</h5>
 					<%
-							for (int i = 0; i < 8; i++) {
-						%>
+						for (int i = 0; i < 8; i++) {
+					%>
 					<div class="row mail_row">
 						<div class="col-sm-5 mail_from_subject">
 							<div class="row ">
@@ -99,8 +101,8 @@
 
 					</div>
 					<%
-							}
-						%>
+						}
+					%>
 				</div>
 			</div>
 			<div class="grid-item">
@@ -113,8 +115,8 @@
 				<div class="card-body">
 					<h5 class="card-title">CNN</h5>
 					<%
-							for (int i = 0; i < 5; i++) {
-						%>
+						for (int i = 0; i < 5; i++) {
+					%>
 					<div id="story_<%=i%>">
 						<div class="row">
 							<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
@@ -126,8 +128,8 @@
 						</div>
 					</div>
 					<%
-							}
-						%>
+						}
+					%>
 				</div>
 			</div>
 			<div class="grid-item">
@@ -142,21 +144,6 @@
 							<div class="col-sm-4" id="current_temperature_today">{{CURRENT
 								TEMPERATURE}}</div>
 						</div>
-						<%
-								for (int i = 0; i < 7; i++) {
-							%>
-						<div class="row forecast">
-							<div class="col-sm-4" id="current_weather_<%=i%>">{{CURRENT
-								WEATHER}}</div>
-							<div class="col-sm-4" id="weather_picture_<%=i%>">{{WEATHER
-								PICTURE}}</div>
-							<div class="col-sm-2" id="temp_lo_<%=i%>">{{TEMP LO }}</div>
-							<div class="col-sm-2" id="temp_hi_<%=i%>">{{TEMP HI }}</div>
-						</div>
-						<%
-								}
-							%>
-						<div class=" row black_border_top"></div>
 					</div>
 				</div>
 			</div>
@@ -164,8 +151,8 @@
 				<div class="card-body">
 					<h5 class="card-title">Twitter</h5>
 					<%
-							for (int i = 0; i < 10; i++) {
-						%>
+						for (int i = 0; i < 10; i++) {
+					%>
 					<div class="row tweetRow">
 						<div class="col-sm-2">
 							#<%=i + 1%>
@@ -173,21 +160,17 @@
 						<div class="col-sm-10" id="tweet_<%=i%>"></div>
 					</div>
 					<%
-							}
-						%>
-					<small class="text-muted">9 mins</small>
+						}
+					%>
+					<div class=" row black_border_top"></div>
 				</div>
 			</div>
 		</div>
-	</main> <script
+	</div>
+	</main>
+	<script
 		src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 	<script>
-	$(function() {
-	    $('#grid').masonry({
-	        itemSelector: '.grid-item',
-	        isFitWidth: true
-	    });
-	});
 		function loadWidgets() {
 			/* var userId = localStorage.getItem('userId'); */
 			/* console.log("start connection for userid " + userId); */
@@ -199,7 +182,7 @@
 				/* console.log("Connection established for userid " + userId); */
 				console.log("Connection established");
 			}
-			
+
 			// on message
 			socket.onmessage = function(event) {
 
@@ -209,7 +192,7 @@
 
 				if (header.includes("Twitter")) {
 					console.log('start twitter js function');
-					
+
 					var obj = JSON.parse(data[1]);
 					/* console.log(obj); */
 
@@ -221,9 +204,10 @@
 							}
 							var twitterName = key;//Name of twitter object
 							var twitterURL = obj[key];
-							var tweet_div = document.getElementById("tweet_" + idNum);
+							var tweet_div = document.getElementById("tweet_"
+									+ idNum);
 							//Clearing the node for when it refreshes
-							while(tweet_div.hasChildNodes()) {
+							while (tweet_div.hasChildNodes()) {
 								tweet_div.removeChild(tweet_div.firstChild);
 							}
 							var anchorTag = document.createElement("a");
@@ -233,12 +217,11 @@
 							idNum++;
 						}
 					}
-					
+
 					console.log('end twitter js function');
-				}
-				else if (header.includes("Weather")) {
+				} else if (header.includes("Weather")) {
 					console.log('start weather js function');
-					
+
 					var obj = JSON.parse(data[1]);
 					/* console.log(obj); */
 
@@ -251,8 +234,10 @@
 					//Get pic 
 					var weatherIcon = document.createElement("IMG");
 					weatherIcon.alt = "Weather.img";
-					console.log("http://openweathermap.org/img/w/" + iconNum + "png");
-					weatherIcon.src = "http://openweathermap.org/img/w/" + iconNum + ".png";
+					console.log("http://openweathermap.org/img/w/" + iconNum
+							+ "png");
+					weatherIcon.src = "http://openweathermap.org/img/w/"
+							+ iconNum + ".png";
 					weatherDiv.appendChild(weatherIcon);
 
 					//Get Temperature
@@ -262,68 +247,65 @@
 					weatherDiv.appendChild(tempHeader);
 
 					//Get Description
-					var descriptionElement = document.createTextNode(description)
+					var descriptionElement = document
+							.createTextNode(description)
 					var descriptionHeader = document.createElement("h1");
 					descriptionHeader.appendChild(descriptionElement);
 					weatherDiv.appendChild(descriptionHeader);
-					
+
 					console.log('end weather js function');
-				}
-				else if (header.includes("Gmail")) {
+				} else if (header.includes("Gmail")) {
 					console.log('start gmail js function');
-					
+
 					var obj = JSON.parse(data[1]);
 					/* console.log(obj); */
-					
+
 					for (i = 0; i < 8; i++) {
-						$('#email_from_'+i).html(obj[i].from);
-						$('#subject_'+i).html(obj[i].subject);
-						$('#email_body_'+i).html(obj[i].snippet);
+						$('#email_from_' + i).html(obj[i].from);
+						$('#subject_' + i).html(obj[i].subject);
+						$('#email_body_' + i).html(obj[i].snippet);
 					}
-					
+
 					console.log('end gmail js function');
-				}
-				else if (header.includes("Crypto")) {
+				} else if (header.includes("Crypto")) {
 					var obj = JSON.parse(data[1]);
-					
+
 					//Put Crypto in its own div
-				}
-				else if(header.includes("YouTube")){
+				} else if (header.includes("YouTube")) {
 					console.log('start youtube js function');
-					
+
 					var obj = JSON.parse(data[1]);
-					for(i=0; i<6; i++){
-						if(obj[i]){
+					for (i = 0; i < 6; i++) {
+						if (obj[i]) {
 							console.log(obj[i]);
-							document.getElementById("video_"+i).innerHTML='<iframe width="150" height="100" src='+obj[i]+'></iframe>';
-						}
-						else{
+							document.getElementById("video_" + i).innerHTML = '<iframe width="150" height="100" src='+obj[i]+'></iframe>';
+						} else {
 							break;
 						}
 					}
 					console.log('end youtube js function');
-				}
-				else if(header.includes("Calendar")){
+				} else if (header.includes("Calendar")) {
 					console.log('start calendar js function');
-					document.getElementById("calendarBody").innerHTML="<ol>";
+					document.getElementById("calendarBody").innerHTML = "<ol>";
 					var obj = JSON.parse(data[1]);
-					for(i=0; i<obj.length; i++){
+					for (i = 0; i < obj.length; i++) {
 						/* if(obj[i]==null){
 							break;
 						} */
-						document.getElementById("calendarBody").innerHTML += "<li>"+obj[i].event+"</li>"
+						document.getElementById("calendarBody").innerHTML += "<li>"
+								+ obj[i].event + "</li>"
 						console.log(obj[i].event);
 					}
-					document.getElementById("calendarBody").innerHTML+="</ol>";
+					document.getElementById("calendarBody").innerHTML += "</ol>";
 					console.log('end calendar js function');
 				}
 
 			}
-				
+
 			// on close
 			socket.onclose = function(event) {
 			}
-			
+
 			// auto close when close window 
 			window.onbeforeunload = function(event) {
 				socket.close();
@@ -333,14 +315,22 @@
 		function kelvinToFahrenheit(temp) {
 			return (temp * (9.0 / 5.0) - 459.67);
 		}
-	</script> <footer class="text-muted"> </footer> <!-- Bootstrap core JavaScript
-    ================================================== --> <!-- Placed at the end of the document so the pages load faster -->
+		$('button.youtube-search').click(function(){
+			window.open('https://www.youtube.com/results?search_query='+$('#youtube-search-input').val(),'_blank')
+		});
+	</script>
+	<footer class="text-muted"> </footer>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script> <script
+		crossorigin="anonymous"></script>
+	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script> <script
+		crossorigin="anonymous"></script>
+	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
