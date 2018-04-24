@@ -130,7 +130,7 @@ public class GmailAPI extends java.lang.Thread {
 				System.out.println("before sending gmail");
 //				session.getBasicRemote().sendText(message);
 				MainServer.sendUpdate(session, message);
-				java.lang.Thread.sleep(10000); // 10 seconds
+				java.lang.Thread.sleep(5000); // 10 seconds
 			} catch (IOException | InterruptedException | IllegalStateException e) {
 				e.printStackTrace();
 				break;

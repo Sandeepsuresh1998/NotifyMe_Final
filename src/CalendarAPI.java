@@ -82,7 +82,7 @@ public class CalendarAPI extends Thread {
 			String message = "Calendar|"+gson;
 			try {
 				MainServer.sendUpdate(session, message);
-				java.lang.Thread.sleep(1000000);
+				java.lang.Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
