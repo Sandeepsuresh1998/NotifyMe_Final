@@ -58,7 +58,7 @@ public class YouTubeAPI extends Thread {
 				System.out.println(i);
 				//System.out.println(slr.getItems().get(i).getSnippet().getTitle());
 				String channelId = slr.getItems().get(i).getSnippet().getResourceId().getChannelId();
-				String firstVideoId = "https://www.youtube.com/embed/"+getFirstVideoIdFromAChannel(channelId)+"?autoplay=1";
+				String firstVideoId = "https://www.youtube.com/embed/"+getFirstVideoIdFromAChannel(channelId)+"?autoplay=0";
 				System.out.println(firstVideoId);
 				videoList.add(firstVideoId);
 			}
