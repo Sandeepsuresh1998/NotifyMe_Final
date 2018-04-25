@@ -50,7 +50,7 @@ public class YouTubeAPI extends Thread {
 			//System.out.println(slr);
 			List<String> subscriptionList = new ArrayList<String>();
 			List<String> videoList = new ArrayList<String>();
-			int subscriptionNumber = 6;
+			int subscriptionNumber = 5;
 			if(subscriptionNumber>slr.getItems().size()) {
 				subscriptionNumber = slr.getItems().size();
 			}
