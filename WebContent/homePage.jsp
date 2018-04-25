@@ -278,7 +278,7 @@
 					for (i = 0; i < 6; i++) {
 						if (obj[i]) {
 							console.log(obj[i]);
-							document.getElementById("video_" + i).innerHTML = '<iframe width="150" height="100" src='+obj[i]+'></iframe>';
+							document.getElementById("video_" + i).innerHTML = '<iframe width="150" height="100" src='+obj[i]+' allowfullscreen="allowfullscreen"></iframe>';
 						} else {
 							break;
 						}
