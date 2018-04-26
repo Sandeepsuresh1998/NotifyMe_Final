@@ -36,7 +36,13 @@
 			</a> <input class="form-control form-control-dark w-100" type="text"
 				placeholder="Search" aria-label="Search">
 			<ul class="navbar-nav px-3">
-				<li class="nav-item text-nowrap"><a href="profilePage.jsp">
+				<li class="nav-item text-nowrap"><a href="
+				<%if(session.getAttribute("userId") != null) {%>
+					profilePage.jsp
+				<%}else{%>
+					Login.jsp
+				<%} %>
+								">
 						<i class="material-icons" style="color: white;">person</i>
 				</a></li>
 			</ul>
@@ -76,11 +82,78 @@
 			</div>
 			<div class="grid-item">
 				<div class="card-body">
+					<h5 class="card-title">CNN</h5>
+					<%
+						for (int i = 0; i < 5; i++) {
+					%>
+					<div id="story_<%=i%>">
+						<div class="row">
+							<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
+							<div class="col-sm-12" id="author_<%=i%>">{{AUTHOR}}</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12" id="preview_text_<%=i%>">{{STORY
+								DECSRIPTION}}</div>
+						</div>
+					</div>
+					<%
+						}
+					%>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Twitter</h5>
+					<ul class="list-group">
+					<%
+						for (int i = 0; i < 10; i++) {
+					%>
+					<li class="row tweetRow list-group-item">
+						<div class="col-sm-2">
+							#<%=i + 1%>
+						</div>
+						<div class="col-sm-10" id="tweet_<%=i%>"></div>
+					</li>
+					<%
+						}
+					%>
+					</ul>
+					<div class=" row black_border_top"></div>
+				</div>
+			</div>
+			
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Weather</h5>
+					<div class="weatherBody">
+						<div class="row">
+							<div class="col-sm-12" id="current_weather_today">{{CURRENT
+								WEATHER}}</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12" id="weather_picture_today">{{WEATHER
+								PICTURE}}</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12" id="current_temperature_today">{{CURRENT
+								TEMPERATURE}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Calendar</h5>
+					<div id="calendarBody"><iframe src="https://calendar.google.com/calendar/embed?src=crewtaylor%40gmail.com&ctz=America%2FLos_Angeles" style="border: 0" width="700" height="445" frameborder="0" scrolling="no"></iframe></div>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
 					<h5 class="card-title">Gmail</h5>
 					<%
 						for (int i = 0; i < 8; i++) {
 					%>
-					<div class="row mail_row">
+					<div class="row mail_row gmail_body	">
 						<div class="col-sm-5 mail_from_subject">
 							<div class="row ">
 								<div class="col-sm-6">From :</div>
@@ -103,66 +176,6 @@
 					<%
 						}
 					%>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Calendar</h5>
-					<div id="calendarBody">{{INSERT GOOGLE CALENDAR}}</div>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">CNN</h5>
-					<%
-						for (int i = 0; i < 5; i++) {
-					%>
-					<div id="story_<%=i%>">
-						<div class="row">
-							<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
-							<div class="col-sm-12" id="author_<%=i%>">{{AUTHOR}}</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12" id="preview_text_<%=i%>">{{STORY
-								DECSRIPTION}}</div>
-						</div>
-					</div>
-					<%
-						}
-					%>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Weather</h5>
-					<div class="weatherBody">
-						<div class="row">
-							<div class="col-sm-4" id="current_weather_today">{{CURRENT
-								WEATHER}}</div>
-							<div class="col-sm-4" id="weather_picture_today">{{WEATHER
-								PICTURE}}</div>
-							<div class="col-sm-4" id="current_temperature_today">{{CURRENT
-								TEMPERATURE}}</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Twitter</h5>
-					<%
-						for (int i = 0; i < 10; i++) {
-					%>
-					<div class="row tweetRow">
-						<div class="col-sm-2">
-							#<%=i + 1%>
-						</div>
-						<div class="col-sm-10" id="tweet_<%=i%>"></div>
-					</div>
-					<%
-						}
-					%>
-					<div class=" row black_border_top"></div>
 				</div>
 			</div>
 		</div>
