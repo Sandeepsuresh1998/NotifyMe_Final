@@ -16,7 +16,7 @@ public class WeatherAPI extends Thread{
 	}
 	
 	public void run() {
-		String weatherURL = "http://api.openweathermap.org/data/2.5/weather?id=5368381&APPID=2273fa9708ebadbe74541112635069ba";
+		String weatherURL = "http://api.openweathermap.org/data/2.5/weather?id=5368381&APPID=afbcfd3e650101530d7d00ed5956e2e0";
 			try {
 				System.out.println("start weather");
 				URL url = new URL(weatherURL);
