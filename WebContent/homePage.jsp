@@ -33,10 +33,16 @@
 				<div class="d-flex justify-content-center align-items-center">
 					<i class="material-icons" style="color: white;">notifications</i> <strong>NotifyMe</strong>
 				</div>
-			</a> <input class="form-control form-control-dark w-100" type="text"
+			</a> <input class="form-control form-control-dark w-100" id="google_search" type="text"
 				placeholder="Search" aria-label="Search">
 			<ul class="navbar-nav px-3">
-				<li class="nav-item text-nowrap"><a href="profilePage.jsp">
+				<li class="nav-item text-nowrap"><a href="
+				<%if(session.getAttribute("userId") != null) {%>
+					profilePage.jsp
+				<%}else{%>
+					Login.jsp
+				<%} %>
+								">
 						<i class="material-icons" style="color: white;">person</i>
 				</a></li>
 			</ul>
@@ -47,31 +53,22 @@
 		<div id="grid">
 			<div class="grid-item">
 				<div class="card-body">
-					<h5 class="card-title">YouTube</h5>
-					<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
-					<div class="input-group mb-2 mr-sm-2">
-						<button
-							class="input-group-prepend btn btn-secondary no_border_radius_right">
-							<i class="material-icons">search</i>
-						</button>
-						<input type="text" class="form-control"
-							id="inlineFormInputGroupUsername2" placeholder="Search">
-					</div>
+					<h5 class="card-title">Twitter</h5>
+					<ul class="list-group">
 					<%
-						for (int i = 0; i < 5; i++) {
+						for (int i = 0; i < 10; i++) {
 					%>
-					<div class="row">
-						<div class="col-sm-12 videowrapper" id="video_<%=i%>">
-							<%-- <iframe
-								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
-							</iframe>
-							{{VIDEO
-							<%=i%>}} --%>
+					<li class="row tweetRow list-group-item">
+						<div class="col-sm-2">
+							#<%=i + 1%>
 						</div>
-					</div>
+						<div class="col-sm-10" id="tweet_<%=i%>"></div>
+					</li>
 					<%
 						}
 					%>
+					</ul>
+					<div class=" row black_border_top"></div>
 				</div>
 			</div>
 			<div class="grid-item">
@@ -80,15 +77,15 @@
 					<%
 						for (int i = 0; i < 8; i++) {
 					%>
-					<div class="row mail_row">
+					<div class="row mail_row gmail_body	">
 						<div class="col-sm-5 mail_from_subject">
 							<div class="row ">
-								<div class="col-sm-6">From :</div>
-								<div class="col-sm-6" id="email_from_<%=i%>">{{NAME}}</div>
+								<div class="col-sm-2"><strong>From :</strong></div>
+								<div class="col-sm-10" id="email_from_<%=i%>"></div>
 							</div>
 							<div class="row">
-								<div class="col-sm-6">Subject :</div>
-								<div class="col-sm-6" id="subject_<%=i%>">{{SUBJECT}}</div>
+								<div class="col-sm-2"><strong>Subject :</strong></div>
+								<div class="col-sm-10" id="subject_<%=i%>"></div>
 							</div>
 						</div>
 						<div
@@ -96,36 +93,9 @@
 							<div class="vl"></div>
 						</div>
 						<div class="col-sm-5">
-							<div id="email_body_<%=i%>">{{MESSAGE BODY}}</div>
+							<div id="email_body_<%=i%>"></div>
 						</div>
 
-					</div>
-					<%
-						}
-					%>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Calendar</h5>
-					<div id="calendarBody">{{INSERT GOOGLE CALENDAR}}</div>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">CNN</h5>
-					<%
-						for (int i = 0; i < 5; i++) {
-					%>
-					<div id="story_<%=i%>">
-						<div class="row">
-							<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
-							<div class="col-sm-12" id="author_<%=i%>">{{AUTHOR}}</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12" id="preview_text_<%=i%>">{{STORY
-								DECSRIPTION}}</div>
-						</div>
 					</div>
 					<%
 						}
@@ -137,29 +107,17 @@
 					<h5 class="card-title">Weather</h5>
 					<div class="weatherBody">
 						<div class="row">
-							<div class="col-sm-4" id="current_weather_today"></div>
+							<div class="col-sm-4" id="current_weather_today">Sunny</div>
 							<div class="col-sm-4" id="weather_picture_today"></div>
-							<div class="col-sm-4" id="current_temperature_today"></div>
+							<div class="col-sm-4" id="current_temperature_today">75 f</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="grid-item">
 				<div class="card-body">
-					<h5 class="card-title">Twitter</h5>
-					<%
-						for (int i = 0; i < 10; i++) {
-					%>
-					<div class="row tweetRow">
-						<div class="col-sm-2">
-							#<%=i + 1%>
-						</div>
-						<div class="col-sm-10" id="tweet_<%=i%>"></div>
-					</div>
-					<%
-						}
-					%>
-					<div class=" row black_border_top"></div>
+					<h5 class="card-title">Calendar</h5>
+					<div id="calendarBody"></iframe></div>
 				</div>
 			</div>
 			<div class="grid-item">
@@ -346,6 +304,11 @@
 		}
 		$('button.youtube-search').click(function(){
 			window.open('https://www.youtube.com/results?search_query='+$('#youtube-search-input').val(),'_blank')
+		});
+		$("#google_search").on('keyup', function (e) {
+		    if (e.keyCode == 13) {
+		    		window.open('https://google.com/search?q='+$('#google_search').val(),'_blank')
+		    }
 		});
 	</script>
 	<footer class="text-muted"> </footer>
