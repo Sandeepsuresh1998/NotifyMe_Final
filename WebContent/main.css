@@ -175,7 +175,7 @@ iframe{
     display: flex;
     flex-direction: column;
 }
-.grid-item {
+.gridle-item {
   margin: 10px;
   float: left;
   border: solid #00000020 1px;
@@ -216,7 +216,19 @@ iframe{
 }
 .fill-available{
 	height: -webkit-fill-available;
+	background-color: #e2e2e2;
 }
-.list-group{
+.list-group-item{
+	background-color: #d7d7d7;
+	border-right: black solid 1px;
+	border-left: black solid 1px;
+}
+.list-group-first{
+	border-top: black solid 1px;
+}
+.list-group-last{
+	border-bottom: black solid 1px;
+}
+.weather_text{
 	
 }

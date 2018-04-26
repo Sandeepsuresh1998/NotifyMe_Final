@@ -33,15 +33,17 @@
 				<div class="d-flex justify-content-center align-items-center">
 					<i class="material-icons" style="color: white;">notifications</i> <strong>NotifyMe</strong>
 				</div>
-			</a> <input class="form-control form-control-dark w-100" id="google_search" type="text"
-				placeholder="Search" aria-label="Search">
+			</a> <input class="form-control form-control-dark w-100"
+				id="google_search" type="text" placeholder="Search"
+				aria-label="Search">
 			<ul class="navbar-nav px-3">
-				<li class="nav-item text-nowrap"><a href="
-				<%if(session.getAttribute("userId") != null) {%>
+				<li class="nav-item text-nowrap"><a
+					href="
+				<%if (session.getAttribute("userId") != null) {%>
 					profilePage.jsp
-				<%}else{%>
+				<%} else {%>
 					Login.jsp
-				<%} %>
+				<%}%>
 								">
 						<i class="material-icons" style="color: white;">person</i>
 				</a></li>
@@ -50,124 +52,218 @@
 	</header>
 	<main role="main">
 	<div class="container">
-		<div id="grid">
-		<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">YouTube</h5>
-					<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
-					<div class="input-group mb-2 mr-sm-2">
-						<button
-							class="input-group-prepend btn btn-secondary no_border_radius_right youtube-search" id="youtube-search">
-							<i class="material-icons">search</i>
-						</button>
-						<input type="text" class="form-control"
-							 placeholder="Search" id="youtube-search-input">
-					</div>
-					<div class="row">
-					<%
-						for (int i = 0; i < 4; i++) {
-					%>
-						<div class="col-sm-3 videowrapper" id="video_<%=i%>">
-							<%-- <iframe
-								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
-							</iframe>
-							{{VIDEO
-							<%=i%>}} --%>
-						</div>
-					<%
-						}
-					%>
+		<%
+			if (session.getAttribute("userId") != null) {
+		%>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Twitter</h5>
+						<ul class="list-group">
+							<%
+								for (int i = 0; i < 10; i++) {
+							%>
+							<li
+								class="row tweetRow list-group-item <%if (i == 0) {%>list-group-first<%}%><%if (i == 9) {%>list-group-last<%}%>">
+								<div class="col-sm-2">
+									#<%=i + 1%>
+								</div>
+								<div class="col-sm-10" id="tweet_<%=i%>"></div>
+							</li>
+							<%
+								}
+							%>
+						</ul>
+						<div class=" row black_border_top"></div>
 					</div>
 				</div>
 			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Twitter</h5>
-					<ul class="list-group">
-					<%
-						for (int i = 0; i < 10; i++) {
-					%>
-					<li class="row tweetRow list-group-item">
-						<div class="col-sm-2">
-							#<%=i + 1%>
-						</div>
-						<div class="col-sm-10" id="tweet_<%=i%>"></div>
-					</li>
-					<%
-						}
-					%>
-					</ul>
-					<div class=" row black_border_top"></div>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Gmail</h5>
-					<%
-						for (int i = 0; i < 8; i++) {
-					%>
-					<div class="row mail_row gmail_body	">
-						<div class="col-sm-5 mail_from_subject">
-							<div class="row ">
-								<div class="col-sm-2"><strong>From :</strong></div>
-								<div class="col-sm-10" id="email_from_<%=i%>"></div>
+			<div class="col-sm-6">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Gmail</h5>
+						<%
+							for (int i = 0; i < 8; i++) {
+						%>
+						<div class="row mail_row gmail_body	">
+							<div class="col-sm-5 mail_from_subject">
+								<div class="row ">
+									<div class="col-sm-2">
+										<strong>From :</strong>
+									</div>
+									<div class="col-sm-10" id="email_from_<%=i%>"></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<strong>Subject :</strong>
+									</div>
+									<div class="col-sm-10" id="subject_<%=i%>"></div>
+								</div>
 							</div>
-							<div class="row">
-								<div class="col-sm-2"><strong>Subject :</strong></div>
-								<div class="col-sm-10" id="subject_<%=i%>"></div>
+							<div
+								class="col-sm-2 d-flex justify-content-center align-items-center">
+								<div class="vl"></div>
 							</div>
-						</div>
-						<div
-							class="col-sm-2 d-flex justify-content-center align-items-center">
-							<div class="vl"></div>
-						</div>
-						<div class="col-sm-5">
-							<div id="email_body_<%=i%>"></div>
-						</div>
+							<div class="col-sm-5">
+								<div id="email_body_<%=i%>"></div>
+							</div>
 
-					</div>
-					<%
-						}
-					%>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Weather</h5>
-					<div class="weatherBody">
-						<div class="row">
-							<div class="col-sm-4" id="current_weather_today"></div>
-							<div class="col-sm-4" id="weather_picture_today"></div>
-							<div class="col-sm-4" id="current_temperature_today"></div>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Calendar</h5>
-					<div id="calendarBody"></iframe></div>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Stocks</h5>
-					<div class="stockBody">
-						<div class="row">
-							<div class="col-sm-4" id="AAPL"></div>
-							<div class="col-sm-4" id="NFLX"></div>
-							<div class="col-sm-4" id="MSFT"></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4" id="TSLA"></div>
-							<div class="col-sm-4" id="FB"></div>
-							<div class="col-sm-4" id="GOOGL"></div>
-						</div>
-							<div class="col-sm-4" id="AMZN"></div>
+						<%
+							}
+						%>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Stocks</h5>
+						<ul class="list-group">
+							<li class="list-group-item list-group-first" id="AAPL"></li>
+							<li class="list-group-item" id="NFLX"></li>
+							<li class="list-group-item" id="MSFT"></li>
+							<li class="list-group-item" id="TSLA"></li>
+							<li class="list-group-item" id="FB"></li>
+							<li class="list-group-item" id="GOOGL"></li>
+							<li class="list-group-item list-group-last" id="AMZN"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Weather</h5>
+						<div class="weatherBody text-center">
+							<div class="row">
+								<div class="col-sm-12" id="current_weather_today"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" id="weather_picture_today"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" id="current_temperature_today"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Calendar</h5>
+						<div id="calendarBody">
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">YouTube</h5>
+						<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
+						<div class="input-group mb-2 mr-sm-2">
+							<button
+								class="input-group-prepend btn btn-secondary no_border_radius_right youtube-search"
+								id="youtube-search">
+								<i class="material-icons">search</i>
+							</button>
+							<input type="text" class="form-control" placeholder="Search"
+								id="youtube-search-input">
+						</div>
+						<div class="row">
+							<%
+								for (int i = 0; i < 4; i++) {
+							%>
+							<div class="col-sm-3 videowrapper" id="video_<%=i%>">
+								<%-- <iframe
+								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
+							</iframe>
+							{{VIDEO
+							<%=i%>}} --%>
+								<iframe width="175" height="250"
+									src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
+							</div>
+							<%
+								}
+							%>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%
+			} else {
+		%>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Twitter</h5>
+						<ul class="list-group">
+							<%
+								for (int i = 0; i < 10; i++) {
+							%>
+							<li
+								class="row tweetRow list-group-item <%if (i == 0) {%>list-group-first<%}%><%if (i == 9) {%>list-group-last<%}%>">
+								<div class="col-sm-2">
+									#<%=i + 1%>
+								</div>
+								<div class="col-sm-10" id="tweet_<%=i%>"></div>
+							</li>
+							<%
+								}
+							%>
+						</ul>
+						<div class=" row black_border_top"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Stocks</h5>
+						<ul class="list-group">
+							<li class="list-group-item list-group-first" id="AAPL"></li>
+							<li class="list-group-item" id="NFLX"></li>
+							<li class="list-group-item" id="MSFT"></li>
+							<li class="list-group-item" id="TSLA"></li>
+							<li class="list-group-item" id="FB"></li>
+							<li class="list-group-item" id="GOOGL"></li>
+							<li class="list-group-item list-group-last" id="AMZN"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="gridle-item">
+					<div class="card-body">
+						<h5 class="card-title">Weather</h5>
+						<div class="weatherBody text-center">
+							<div class="row">
+								<div class="col-sm-12" id="current_weather_today"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" id="weather_picture_today"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" id="current_temperature_today"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%
+			}
+		%>
 	</div>
 	</main>
 	<script
@@ -231,29 +327,35 @@
 					var description = obj.weather[0].description;
 					var temp = Math.trunc(kelvinToFahrenheit(obj.main.temp));
 
-
 					//Get pic 
-					var weather_pic_div = document.getElementById("weather_picture_today");
+					var weather_pic_div = document
+							.getElementById("weather_picture_today");
 					var weatherIcon = document.createElement("IMG");
 					weatherIcon.alt = "Weather.img";
 					console.log("http://openweathermap.org/img/w/" + iconNum
 							+ "png");
 					weatherIcon.src = "http://openweathermap.org/img/w/"
 							+ iconNum + ".png";
+					weatherIcon.className = "img-responsive";
 					weather_pic_div.appendChild(weatherIcon);
 
 					//Get Temperature
-					var current_weather_div = document.getElementById("current_temperature_today");
-					var tempElement = document.createTextNode(temp + "\xB0" + "F");
+					var current_weather_div = document
+							.getElementById("current_temperature_today");
+					var tempElement = document.createTextNode(temp + "\xB0"
+							+ "F");
 					var tempHeader = document.createElement("h1");
+					tempHeader.className = "weather_text";
 					tempHeader.appendChild(tempElement);
 					current_weather_div.appendChild(tempHeader);
 
 					//Get Description
-					var weather_description_div = document.getElementById("current_weather_today")
+					var weather_description_div = document
+							.getElementById("current_weather_today")
 					var descriptionElement = document
 							.createTextNode(description)
 					var descriptionHeader = document.createElement("h1");
+					descriptionHeader.className = "weather_text";
 					descriptionHeader.appendChild(descriptionElement);
 					weather_description_div.appendChild(descriptionHeader);
 
@@ -262,6 +364,7 @@
 					console.log('start gmail js function');
 
 					var obj = JSON.parse(data[1]);
+
 					/* console.log(obj); */
 
 					for (i = 0; i < 8; i++) {
@@ -273,15 +376,18 @@
 					console.log('end gmail js function');
 				} else if (header.includes("Stocks")) {
 					var obj = JSON.parse(data[1]);
-					
+
 					var stocks = obj['Stock Quotes'];
-					
-					
-					for(var i = 0; i < stocks.length; i++) {
-						console.log(stocks[i]['1. symbol']); 
-						stock_div = document.getElementById(stocks[i]['1. symbol']);
-						var price_text = document.createTextNode(stocks[i]['1. symbol'] + ": " + stocks[i]['2. price']);
-						var price = document.createElement("div");
+
+					for (var i = 0; i < stocks.length; i++) {
+						console.log(stocks[i]['1. symbol']);
+						stock_div = document
+								.getElementById(stocks[i]['1. symbol']);
+						var price_text = document
+								.createTextNode(stocks[i]['1. symbol'] + ": "
+										+ stocks[i]['2. price']);
+						var price = document.createElement("li");
+						price.className = "list-item"
 						price.appendChild(price_text);
 						stock_div.appendChild(price);
 					}
@@ -333,14 +439,19 @@
 		function kelvinToFahrenheit(temp) {
 			return (temp * (9.0 / 5.0) - 459.67);
 		}
-		$('button.youtube-search').click(function(){
-			window.open('https://www.youtube.com/results?search_query='+$('#youtube-search-input').val(),'_blank')
-		});
-		$("#google_search").on('keyup', function (e) {
-		    if (e.keyCode == 13) {
-		    		window.open('https://google.com/search?q='+$('#google_search').val(),'_blank')
-		    }
-		});
+		$('button.youtube-search').click(
+				function() {
+					window.open('https://www.youtube.com/results?search_query='
+							+ $('#youtube-search-input').val(), '_blank')
+				});
+		$("#google_search").on(
+				'keyup',
+				function(e) {
+					if (e.keyCode == 13) {
+						window.open('https://google.com/search?q='
+								+ $('#google_search').val(), '_blank')
+					}
+				});
 	</script>
 	<footer class="text-muted"> </footer>
 	<!-- Bootstrap core JavaScript

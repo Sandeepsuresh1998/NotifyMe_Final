@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	if(request.getParameter("access_token") != null){
+		System.out.println("HERERERERERERERWERQWERQWERQWERQ");
+		String redirectURL = "homePage.jsp";
+	    response.sendRedirect(redirectURL);
+	}
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,32 +24,6 @@
 	rel="stylesheet">
 <meta name="google-signin-client_id"
 	content="496920584851-fmjavghisqpvdb9i0s0cs08q5fuvo63u.apps.googleusercontent.com">
-
-<style>
-#login {
-	top: 45%;
-}
-
-#home {
-	top: 53%;
-}
-
-html {
-	height: 100%;
-}
-
-body {
-	height: 100%;
-}
-
-.flex-container {
-	border-radius: 10px;
-	justify-content: center;
-	display: flex;
-	align-items: center;
-	height: 100%;
-}
-</style>
 </head>
 
 <!--
@@ -69,9 +51,9 @@ body {
 	</nav> </header>
 	<div class="text-center fill-available d-flex justify-content-center align-items-center">
 		<div class="form-signin">
-			<button class="btn btn-lg btn-primary btn-block" id="login"
+			<button class="btn btn-lg  btn-outline-secondary btn-block" id="login"
 				onclick="trySampleRequest();" type="submit">Login</button>
-			<button class="btn btn-lg btn-primary btn-block" id="home"
+			<button class="btn btn-lg btn-outline-secondary btn-block" id="home"
 				onclick="toHomePage();" type="submit">Continue to Home Page</button>
 		</div>
 	</div>
