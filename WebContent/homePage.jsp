@@ -53,6 +53,35 @@
 		<div id="grid">
 			<div class="grid-item">
 				<div class="card-body">
+					<h5 class="card-title">YouTube</h5>
+					<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
+					<div class="input-group mb-2 mr-sm-2">
+						<button
+							class="input-group-prepend btn btn-secondary no_border_radius_right">
+							<i class="material-icons">search</i>
+						</button>
+						<input type="text" class="form-control"
+							id="inlineFormInputGroupUsername2" placeholder="Search">
+					</div>
+					<%
+						for (int i = 0; i < 5; i++) {
+					%>
+					<div class="row">
+						<div class="col-sm-12 videowrapper" id="video_<%=i%>">
+							<%-- <iframe
+								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
+							</iframe>
+							{{VIDEO
+							<%=i%>}} --%>
+						</div>
+					</div>
+					<%
+						}
+					%>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
 					<h5 class="card-title">Twitter</h5>
 					<ul class="list-group">
 					<%
