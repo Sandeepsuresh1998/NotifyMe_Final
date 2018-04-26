@@ -53,56 +53,6 @@
 		<div id="grid">
 			<div class="grid-item">
 				<div class="card-body">
-					<h5 class="card-title">YouTube</h5>
-					<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
-					<div class="input-group mb-2 mr-sm-2">
-						<button
-							class="input-group-prepend btn btn-secondary no_border_radius_right">
-							<i class="material-icons">search</i>
-						</button>
-						<input type="text" class="form-control"
-							id="inlineFormInputGroupUsername2" placeholder="Search">
-					</div>
-					<%
-						for (int i = 0; i < 5; i++) {
-					%>
-					<div class="row">
-						<div class="col-sm-12 videowrapper" id="video_<%=i%>">
-							<%-- <iframe
-								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
-							</iframe>
-							{{VIDEO
-							<%=i%>}} --%>
-						</div>
-					</div>
-					<%
-						}
-					%>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">CNN</h5>
-					<%
-						for (int i = 0; i < 5; i++) {
-					%>
-					<div id="story_<%=i%>">
-						<div class="row">
-							<div class="col-sm-12" id="headline_<%=i%>">{{HEADLINE}}</div>
-							<div class="col-sm-12" id="author_<%=i%>">{{AUTHOR}}</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12" id="preview_text_<%=i%>">{{STORY
-								DECSRIPTION}}</div>
-						</div>
-					</div>
-					<%
-						}
-					%>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
 					<h5 class="card-title">Twitter</h5>
 					<ul class="list-group">
 					<%
@@ -121,25 +71,6 @@
 					<div class=" row black_border_top"></div>
 				</div>
 			</div>
-			
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Weather</h5>
-					<div class="weatherBody">
-						<div class="row">
-							<div class="col-sm-4" id="current_weather_today"></div>
-							<div class="col-sm-4" id="weather_picture_today"></div>
-							<div class="col-sm-4" id="current_temperature_today"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="grid-item">
-				<div class="card-body">
-					<h5 class="card-title">Calendar</h5>
-					<div id="calendarBody"><iframe src="https://calendar.google.com/calendar/embed?src=crewtaylor%40gmail.com&ctz=America%2FLos_Angeles" style="border: 0" width="700" height="445" frameborder="0" scrolling="no"></iframe></div>
-				</div>
-			</div>
 			<div class="grid-item">
 				<div class="card-body">
 					<h5 class="card-title">Gmail</h5>
@@ -149,12 +80,12 @@
 					<div class="row mail_row gmail_body	">
 						<div class="col-sm-5 mail_from_subject">
 							<div class="row ">
-								<div class="col-sm-6">From :</div>
-								<div class="col-sm-6" id="email_from_<%=i%>">{{NAME}}</div>
+								<div class="col-sm-2"><strong>From :</strong></div>
+								<div class="col-sm-10" id="email_from_<%=i%>"></div>
 							</div>
 							<div class="row">
-								<div class="col-sm-6">Subject :</div>
-								<div class="col-sm-6" id="subject_<%=i%>">{{SUBJECT}}</div>
+								<div class="col-sm-2"><strong>Subject :</strong></div>
+								<div class="col-sm-10" id="subject_<%=i%>"></div>
 							</div>
 						</div>
 						<div
@@ -162,7 +93,7 @@
 							<div class="vl"></div>
 						</div>
 						<div class="col-sm-5">
-							<div id="email_body_<%=i%>">{{MESSAGE BODY}}</div>
+							<div id="email_body_<%=i%>"></div>
 						</div>
 
 					</div>
@@ -174,6 +105,24 @@
 			<div class="grid-item">
 				<div class="card-body">
 					<h5 class="card-title">Weather</h5>
+					<div class="weatherBody">
+						<div class="row">
+							<div class="col-sm-4" id="current_weather_today">Sunny</div>
+							<div class="col-sm-4" id="weather_picture_today"></div>
+							<div class="col-sm-4" id="current_temperature_today">75 f</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Calendar</h5>
+					<div id="calendarBody"></iframe></div>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Stocks</h5>
 					<div class="stockBody">
 						<div class="row">
 							<div class="col-sm-4" id="APPL"></div>
