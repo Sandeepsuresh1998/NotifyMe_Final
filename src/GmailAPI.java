@@ -107,6 +107,9 @@ public class GmailAPI extends java.lang.Thread {
 				}
 				else if (temp.equals("Subject")) {
 					subject = message.getPayload().getHeaders().get(j).getValue();
+					if (subject.length() > 35) {
+						subject = (subject.substring(0, 30) + "...");
+					}
 				}
 			}
 			headers.add(new Header(from, subject, snippet));
