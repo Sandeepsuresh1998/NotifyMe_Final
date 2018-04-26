@@ -156,9 +156,7 @@
 				<div class="gridle-item">
 					<div class="card-body">
 						<h5 class="card-title">Calendar</h5>
-						<div id="calendarBody">
-							</iframe>
-						</div>
+						<div id="calendarBody"></div>
 					</div>
 				</div>
 			</div>
@@ -179,26 +177,18 @@
 								id="youtube-search-input">
 						</div>
 						<div class="row">
-							<%
-								for (int i = 0; i < 4; i++) {
-							%>
-							<div class="col-sm-3 videowrapper" id="video_<%=i%>">
-								<%-- <iframe
-								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
-							</iframe>
-							{{VIDEO
-							<%=i%>}} --%>
-							<%
-								}
-							%>
+						<div class="col-sm-3 videowrapper" id="video_0"></div>
+						<div class="col-sm-3 videowrapper" id="video_1"></div>
+						<div class="col-sm-3 videowrapper" id="video_2"></div>
+						<div class="col-sm-3 videowrapper" id="video_3"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<%
-			} else {
-		%>
+				} else {
+			%>
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="gridle-item">
@@ -206,8 +196,8 @@
 						<h5 class="card-title">Twitter</h5>
 						<ul class="list-group">
 							<%
-								for (int i = 0; i < 10; i++) {
-							%>
+									for (int i = 0; i < 10; i++) {
+								%>
 							<li
 								class="row tweetRow list-group-item <%if (i == 0) {%>list-group-first<%}%><%if (i == 9) {%>list-group-last<%}%>">
 								<div class="col-sm-2">
@@ -216,8 +206,8 @@
 								<div class="col-sm-10" id="tweet_<%=i%>"></div>
 							</li>
 							<%
-								}
-							%>
+									}
+								%>
 						</ul>
 						<div class=" row black_border_top"></div>
 					</div>
@@ -259,8 +249,8 @@
 			</div>
 		</div>
 		<%
-			}
-		%>
+				}
+			%>
 	</div>
 	</main>
 	<script
@@ -394,7 +384,8 @@
 
 					var obj = JSON.parse(data[1]);
 					var numVideo = 0;
-					for (i = 0; i < 5; i++) {
+					console.log(obj);
+					for (i = 0; i < 4; i++) {
 						if (obj[i]) {
 							console.log(obj[i]);
 							document.getElementById("video_" + i).innerHTML = '<iframe width="239" height="250" src='+obj[i]+' allowfullscreen="allowfullscreen"></iframe>';
