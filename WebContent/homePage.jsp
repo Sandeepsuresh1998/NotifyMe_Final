@@ -137,10 +137,8 @@
 					<h5 class="card-title">Weather</h5>
 					<div class="weatherBody">
 						<div class="row">
-							<div class="col-sm-4" id="current_weather_today">{{CURRENT
-								WEATHER}}</div>
-							<div class="col-sm-4" id="weather_picture_today">{{WEATHER
-								PICTURE}}</div>
+							<div class="col-sm-4" id="current_weather_today"></div>
+							<div class="col-sm-4" id="weather_picture_today"></div>
 							<div class="col-sm-4" id="current_temperature_today">{{CURRENT
 								TEMPERATURE}}</div>
 						</div>
@@ -229,24 +227,26 @@
 					var description = obj.weather[0].description;
 					var temp = Math.trunc(kelvinToFahrenheit(obj.main.temp));
 
-					var weatherDiv = document.getElementById("weatherBody");
 
 					//Get pic 
+					var weather_pic_div = document.getElementById("weather_picture_today");
 					var weatherIcon = document.createElement("IMG");
 					weatherIcon.alt = "Weather.img";
 					console.log("http://openweathermap.org/img/w/" + iconNum
 							+ "png");
 					weatherIcon.src = "http://openweathermap.org/img/w/"
 							+ iconNum + ".png";
-					weatherDiv.appendChild(weatherIcon);
+					weather_pic_div.appendChild(weatherIcon);
 
 					//Get Temperature
+					var current_weather_div = document.getElementById("current_temperature_today");
 					var tempElement = document.createTextNode(temp)
 					var tempHeader = document.createElement("h1");
 					tempHeader.appendChild(tempElement);
-					weatherDiv.appendChild(tempHeader);
+					current_weather_div.appendChild(tempHeader);
 
 					//Get Description
+					var weather_description_div = document.getElementById("current_weather_today")
 					var descriptionElement = document
 							.createTextNode(description)
 					var descriptionHeader = document.createElement("h1");
