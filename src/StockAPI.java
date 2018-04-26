@@ -15,7 +15,7 @@ public class StockAPI extends Thread {
 	
 	public void run() {
 		String stockURL = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=AAPL,NFLX,MSFT,TSLA,FB,GOOGL,AMZN&apikey=6709TV0OTTNCIU2L";
-		while(true) {
+		while(mSession.isOpen()) {
 			try {
 				System.out.println("start stock");
 				URL url = new URL(stockURL);
