@@ -163,26 +163,6 @@ footer p {
 .black_border_top{
 	border-top: 1px #dcdcdc solid;
 }
-.videowrapper {
-    float: none;
-    clear: both;
-    width: 100%;
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 25px;
-    height: 0;
-}
-.videowrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.page-id-1606 #x-section-6 .x-video.embed.with-container {
-    border: none;
-    box-shadow: none;
-}
 iframe{
 	border:none;
 	padding-bottom: 10px;

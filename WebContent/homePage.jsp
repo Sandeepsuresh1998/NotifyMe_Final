@@ -57,17 +57,17 @@
 					<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
 					<div class="input-group mb-2 mr-sm-2">
 						<button
-							class="input-group-prepend btn btn-secondary no_border_radius_right">
+							class="input-group-prepend btn btn-secondary no_border_radius_right youtube-search" id="youtube-search">
 							<i class="material-icons">search</i>
 						</button>
 						<input type="text" class="form-control"
-							id="inlineFormInputGroupUsername2" placeholder="Search">
+							 placeholder="Search" id="youtube-search-input">
 					</div>
 					<div class="row">
 					<%
-						for (int i = 0; i < 3; i++) {
+						for (int i = 0; i < 4; i++) {
 					%>
-						<div class="col-sm-4 videowrapper" id="video_<%=i%>">
+						<div class="col-sm-3 videowrapper" id="video_<%=i%>">
 							<%-- <iframe
 								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
 							</iframe>
@@ -281,7 +281,7 @@
 						console.log(stocks[i]['1. symbol']); 
 						stock_div = document.getElementById(stocks[i]['1. symbol']);
 						var price_text = document.createTextNode(stocks[i]['1. symbol'] + ": " + stocks[i]['2. price']);
-						var price = document.createElement("h1");
+						var price = document.createElement("div");
 						price.appendChild(price_text);
 						stock_div.appendChild(price);
 					}
@@ -294,7 +294,7 @@
 					for (i = 0; i < 5; i++) {
 						if (obj[i]) {
 							console.log(obj[i]);
-							document.getElementById("video_" + i).innerHTML = '<iframe width="150" height="100" src='+obj[i]+' allowfullscreen="allowfullscreen"></iframe>';
+							document.getElementById("video_" + i).innerHTML = '<iframe width="239" height="250" src='+obj[i]+' allowfullscreen="allowfullscreen"></iframe>';
 							numVideo++;
 						} else {
 							//document.getElementById("video_" + i).innerHTML = ''
