@@ -188,8 +188,7 @@
 							</iframe>
 							{{VIDEO
 							<%=i%>}} --%>
-								<iframe width="175" height="250"
-									src="https://www.youtube.com/embed/tgbNymZ7vqY"> </iframe>
+								
 							</div>
 							<%
 								}

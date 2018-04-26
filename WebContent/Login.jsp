@@ -52,7 +52,7 @@
 	<div class="text-center fill-available d-flex justify-content-center align-items-center">
 		<div class="form-signin">
 			<button class="btn btn-lg  btn-outline-secondary btn-block" id="login"
-				onclick="trySampleRequest();" type="submit">Login</button>
+				onclick="trySampleRequest();" type="submit">Login with Google</button>
 			<button class="btn btn-lg btn-outline-secondary btn-block" id="home"
 				onclick="toHomePage();" type="submit">Continue to Home Page</button>
 		</div>
