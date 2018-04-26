@@ -17,6 +17,7 @@ public class StockAPI extends Thread {
 		String stockURL = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=AAPL,NFLX,MSFT,TSLA,FB,GOOGL,AMZN&apikey=6709TV0OTTNCIU2L";
 		while(true) {
 			try {
+				System.out.println("start stock");
 				URL url = new URL(stockURL);
 		        URLConnection yc = url.openConnection();
 		        BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
@@ -25,6 +26,7 @@ public class StockAPI extends Thread {
 		        while ((inputLine = in.readLine()) != null) {
 		        		response += inputLine;
 		        }
+		        System.out.println("before sending stock");
 		        System.out.println(response);
 		        String stockData = "Stocks|" + response;
 		        mSession.getBasicRemote().sendText(stockData);

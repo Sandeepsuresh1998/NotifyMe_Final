@@ -45,7 +45,7 @@ public class MainServer {
 			YouTubeAPI gApi = new YouTubeAPI(session, DBController.getAccessToken(userId));
 		}
 		if (widgets.get(5)) {
-
+			StockAPI sAPI = new StockAPI(session);
 		}
 		
     }
