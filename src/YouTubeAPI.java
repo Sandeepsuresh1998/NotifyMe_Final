@@ -50,7 +50,7 @@ public class YouTubeAPI extends Thread {
 			//System.out.println(slr);
 			List<String> subscriptionList = new ArrayList<String>();
 			List<String> videoList = new ArrayList<String>();
-			int subscriptionNumber = 6;
+			int subscriptionNumber = 5;
 			if(subscriptionNumber>slr.getItems().size()) {
 				subscriptionNumber = slr.getItems().size();
 			}
@@ -58,7 +58,7 @@ public class YouTubeAPI extends Thread {
 				System.out.println(i);
 				//System.out.println(slr.getItems().get(i).getSnippet().getTitle());
 				String channelId = slr.getItems().get(i).getSnippet().getResourceId().getChannelId();
-				String firstVideoId = "https://www.youtube.com/embed/"+getFirstVideoIdFromAChannel(channelId)+"?autoplay=1";
+				String firstVideoId = "https://www.youtube.com/embed/"+getFirstVideoIdFromAChannel(channelId)+"?autoplay=0";
 				System.out.println(firstVideoId);
 				videoList.add(firstVideoId);
 			}

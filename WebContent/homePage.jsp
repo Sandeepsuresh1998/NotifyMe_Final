@@ -33,7 +33,7 @@
 				<div class="d-flex justify-content-center align-items-center">
 					<i class="material-icons" style="color: white;">notifications</i> <strong>NotifyMe</strong>
 				</div>
-			</a> <input class="form-control form-control-dark w-100" type="text"
+			</a> <input class="form-control form-control-dark w-100" id="google_search" type="text"
 				placeholder="Search" aria-label="Search">
 			<ul class="navbar-nav px-3">
 				<li class="nav-item text-nowrap"><a href="
@@ -68,11 +68,11 @@
 					%>
 					<div class="row">
 						<div class="col-sm-12 videowrapper" id="video_<%=i%>">
-							<iframe
+							<%-- <iframe
 								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
 							</iframe>
 							{{VIDEO
-							<%=i%>}}
+							<%=i%>}} --%>
 						</div>
 					</div>
 					<%
@@ -127,16 +127,9 @@
 					<h5 class="card-title">Weather</h5>
 					<div class="weatherBody">
 						<div class="row">
-							<div class="col-sm-12" id="current_weather_today">{{CURRENT
-								WEATHER}}</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12" id="weather_picture_today">{{WEATHER
-								PICTURE}}</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12" id="current_temperature_today">{{CURRENT
-								TEMPERATURE}}</div>
+							<div class="col-sm-4" id="current_weather_today"></div>
+							<div class="col-sm-4" id="weather_picture_today"></div>
+							<div class="col-sm-4" id="current_temperature_today"></div>
 						</div>
 					</div>
 				</div>
@@ -176,6 +169,22 @@
 					<%
 						}
 					%>
+				</div>
+			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Weather</h5>
+					<div class="stockBody">
+						<div class="row">
+							<div class="col-sm-4" id="APPL"></div>
+							<div class="col-sm-4" id="NFLX"></div>
+							<div class="col-sm-4" id="MSFT"></div>
+							<div class="col-sm-4" id="TSLA"></div>
+							<div class="col-sm-4" id="FB"></div>
+							<div class="col-sm-4" id="GOOGL"></div>
+							<div class="col-sm-4" id="AMZN"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -242,29 +251,31 @@
 					var description = obj.weather[0].description;
 					var temp = Math.trunc(kelvinToFahrenheit(obj.main.temp));
 
-					var weatherDiv = document.getElementById("weatherBody");
 
 					//Get pic 
+					var weather_pic_div = document.getElementById("weather_picture_today");
 					var weatherIcon = document.createElement("IMG");
 					weatherIcon.alt = "Weather.img";
 					console.log("http://openweathermap.org/img/w/" + iconNum
 							+ "png");
 					weatherIcon.src = "http://openweathermap.org/img/w/"
 							+ iconNum + ".png";
-					weatherDiv.appendChild(weatherIcon);
+					weather_pic_div.appendChild(weatherIcon);
 
 					//Get Temperature
-					var tempElement = document.createTextNode(temp)
+					var current_weather_div = document.getElementById("current_temperature_today");
+					var tempElement = document.createTextNode(temp + "\xB0" + "F");
 					var tempHeader = document.createElement("h1");
 					tempHeader.appendChild(tempElement);
-					weatherDiv.appendChild(tempHeader);
+					current_weather_div.appendChild(tempHeader);
 
 					//Get Description
+					var weather_description_div = document.getElementById("current_weather_today")
 					var descriptionElement = document
 							.createTextNode(description)
 					var descriptionHeader = document.createElement("h1");
 					descriptionHeader.appendChild(descriptionElement);
-					weatherDiv.appendChild(descriptionHeader);
+					weather_description_div.appendChild(descriptionHeader);
 
 					console.log('end weather js function');
 				} else if (header.includes("Gmail")) {
@@ -280,7 +291,7 @@
 					}
 
 					console.log('end gmail js function');
-				} else if (header.includes("Crypto")) {
+				} else if (header.includes("Stocks")) {
 					var obj = JSON.parse(data[1]);
 
 					//Put Crypto in its own div
@@ -288,11 +299,14 @@
 					console.log('start youtube js function');
 
 					var obj = JSON.parse(data[1]);
-					for (i = 0; i < 6; i++) {
+					var numVideo = 0;
+					for (i = 0; i < 5; i++) {
 						if (obj[i]) {
 							console.log(obj[i]);
-							document.getElementById("video_" + i).innerHTML = '<iframe width="150" height="100" src='+obj[i]+'></iframe>';
+							document.getElementById("video_" + i).innerHTML = '<iframe width="150" height="100" src='+obj[i]+' allowfullscreen="allowfullscreen"></iframe>';
+							numVideo++;
 						} else {
+							//document.getElementById("video_" + i).innerHTML = ''
 							break;
 						}
 					}
@@ -330,6 +344,11 @@
 		}
 		$('button.youtube-search').click(function(){
 			window.open('https://www.youtube.com/results?search_query='+$('#youtube-search-input').val(),'_blank')
+		});
+		$("#google_search").on('keyup', function (e) {
+		    if (e.keyCode == 13) {
+		    		window.open('https://google.com/search?q='+$('#google_search').val(),'_blank')
+		    }
 		});
 	</script>
 	<footer class="text-muted"> </footer>
