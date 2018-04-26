@@ -51,7 +51,7 @@
 	<main role="main">
 	<div class="container">
 		<div id="grid">
-			<div class="grid-item">
+		<div class="grid-item">
 				<div class="card-body">
 					<h5 class="card-title">YouTube</h5>
 					<label class="sr-only" for="inlineFormInputGroupUsername2">Search</label>
@@ -63,21 +63,21 @@
 						<input type="text" class="form-control"
 							id="inlineFormInputGroupUsername2" placeholder="Search">
 					</div>
-					<%
-						for (int i = 0; i < 5; i++) {
-					%>
 					<div class="row">
-						<div class="col-sm-12 videowrapper" id="video_<%=i%>">
+					<%
+						for (int i = 0; i < 3; i++) {
+					%>
+						<div class="col-sm-4 videowrapper" id="video_<%=i%>">
 							<%-- <iframe
 								src="https://www.youtube.com/embed/<%//YOUTUBE VIDEO ID%>">
 							</iframe>
 							{{VIDEO
 							<%=i%>}} --%>
 						</div>
-					</div>
 					<%
 						}
 					%>
+					</div>
 				</div>
 			</div>
 			<div class="grid-item">
@@ -136,9 +136,9 @@
 					<h5 class="card-title">Weather</h5>
 					<div class="weatherBody">
 						<div class="row">
-							<div class="col-sm-4" id="current_weather_today">Sunny</div>
+							<div class="col-sm-4" id="current_weather_today"></div>
 							<div class="col-sm-4" id="weather_picture_today"></div>
-							<div class="col-sm-4" id="current_temperature_today">75 f</div>
+							<div class="col-sm-4" id="current_temperature_today"></div>
 						</div>
 					</div>
 				</div>
@@ -157,11 +157,13 @@
 							<div class="col-sm-4" id="AAPL"></div>
 							<div class="col-sm-4" id="NFLX"></div>
 							<div class="col-sm-4" id="MSFT"></div>
+						</div>
+						<div class="row">
 							<div class="col-sm-4" id="TSLA"></div>
 							<div class="col-sm-4" id="FB"></div>
 							<div class="col-sm-4" id="GOOGL"></div>
-							<div class="col-sm-4" id="AMZN"></div>
 						</div>
+							<div class="col-sm-4" id="AMZN"></div>
 					</div>
 				</div>
 			</div>
