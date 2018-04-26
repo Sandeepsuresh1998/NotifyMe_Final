@@ -37,16 +37,16 @@ public class MainServer {
 			if (widgets.get(0)) {
 				TwitterApi tApi = new TwitterApi(session);
 			}
-			if (!widgets.get(1)) {
+			if (widgets.get(1)) {
 				GmailAPI gApi = new GmailAPI(session, DBController.getAccessToken(userId));
 			}
 			if (widgets.get(2)) {
 				WeatherAPI wApi = new WeatherAPI(session);
 			}
-			if (!widgets.get(3)) {
+			if (widgets.get(3)) {
 				CalendarAPI gApi = new CalendarAPI(session, DBController.getAccessToken(userId));
 			}
-			if (!widgets.get(4)) {
+			if (widgets.get(4)) {
 				YouTubeAPI gApi = new YouTubeAPI(session, DBController.getAccessToken(userId));
 			}
 			if (widgets.get(5)) {

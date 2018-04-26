@@ -33,7 +33,7 @@ public class YouTubeAPI extends Thread {
 	 */
 	public YouTubeAPI(Session s, String accessToken) {
 		this.session = s;
-		System.out.println("In YouTube API Thread");
+//		System.out.println("In YouTube API Thread");
 		// TODO Auto-generated constructor stub
 		//this.accessToken = accessToken;
 		credential = new GoogleCredential().setAccessToken(accessToken);
@@ -55,11 +55,11 @@ public class YouTubeAPI extends Thread {
 				subscriptionNumber = slr.getItems().size();
 			}
 			for(int i=0; i<subscriptionNumber; i++) {
-				System.out.println(i);
+//				System.out.println(i);
 				//System.out.println(slr.getItems().get(i).getSnippet().getTitle());
 				String channelId = slr.getItems().get(i).getSnippet().getResourceId().getChannelId();
 				String firstVideoId = "https://www.youtube.com/embed/"+getFirstVideoIdFromAChannel(channelId)+"?autoplay=0";
-				System.out.println(firstVideoId);
+//				System.out.println(firstVideoId);
 				videoList.add(firstVideoId);
 			}
 			Gson json = new Gson();
