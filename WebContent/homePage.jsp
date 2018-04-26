@@ -284,8 +284,18 @@
 					console.log('end gmail js function');
 				} else if (header.includes("Stocks")) {
 					var obj = JSON.parse(data[1]);
+					
+					var stocks = obj['Stock Quotes'];
+					
+					
+					for(var i = 0; i < stocks.length; i++) {
+						stock_div = document.getElementById(stocks[i]['1. symbol']);
+						var price_text = document.createTextNode(stocks[i]['1. symbol'] + ": " + stocks[i]['2. price']);
+						var price = document.createElement("h1");
+						price.appendChild(price_text);
+						stock_div.appendChild(price);
+					}
 
-					//Put Crypto in its own div
 				} else if (header.includes("YouTube")) {
 					console.log('start youtube js function');
 
