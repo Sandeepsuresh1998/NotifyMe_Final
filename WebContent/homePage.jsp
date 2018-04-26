@@ -370,6 +370,10 @@
 						console.log(stocks[i]['1. symbol']);
 						stock_div = document
 								.getElementById(stocks[i]['1. symbol']);
+						//Clearing the node for when it refreshes
+						while (stock_div.hasChildNodes()) {
+							stock_div.removeChild(tweet_div.firstChild);
+						}
 						var price_text = document
 								.createTextNode(stocks[i]['1. symbol'] + ": "
 										+ stocks[i]['2. price']);

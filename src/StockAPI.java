@@ -30,7 +30,7 @@ public class StockAPI extends Thread {
 		        String stockData = "Stocks|" + response;
 		        System.out.println("before sending stock");
 		        mSession.getBasicRemote().sendText(stockData);
-		        Thread.sleep(600000);
+		        Thread.sleep(60000);
 			} catch (IOException ioe) {
 				// TODO Auto-generated catch block
 				ioe.printStackTrace();
