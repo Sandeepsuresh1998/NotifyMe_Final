@@ -57,7 +57,7 @@ public class TwitterApi extends Thread{
 //				mSession.getBasicRemote().sendText(data);
 				System.out.println("before sending twitter");
 				MainServer.sendUpdate(mSession, data);
-				Thread.sleep(20000); // 20 seconds 
+				Thread.sleep(60000); // 60 seconds 
 			} catch (TwitterException | InterruptedException e) {
 				e.printStackTrace();
 				break;
