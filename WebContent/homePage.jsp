@@ -162,6 +162,22 @@
 					<div class=" row black_border_top"></div>
 				</div>
 			</div>
+			<div class="grid-item">
+				<div class="card-body">
+					<h5 class="card-title">Weather</h5>
+					<div class="stockBody">
+						<div class="row">
+							<div class="col-sm-4" id="APPL"></div>
+							<div class="col-sm-4" id="NFLX"></div>
+							<div class="col-sm-4" id="MSFT"></div>
+							<div class="col-sm-4" id="TSLA"></div>
+							<div class="col-sm-4" id="FB"></div>
+							<div class="col-sm-4" id="GOOGL"></div>
+							<div class="col-sm-4" id="AMZN"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	</main>
@@ -266,7 +282,7 @@
 					}
 
 					console.log('end gmail js function');
-				} else if (header.includes("Crypto")) {
+				} else if (header.includes("Stocks")) {
 					var obj = JSON.parse(data[1]);
 
 					//Put Crypto in its own div
