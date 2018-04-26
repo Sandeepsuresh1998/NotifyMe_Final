@@ -139,8 +139,7 @@
 						<div class="row">
 							<div class="col-sm-4" id="current_weather_today"></div>
 							<div class="col-sm-4" id="weather_picture_today"></div>
-							<div class="col-sm-4" id="current_temperature_today">{{CURRENT
-								TEMPERATURE}}</div>
+							<div class="col-sm-4" id="current_temperature_today"></div>
 						</div>
 					</div>
 				</div>
@@ -240,7 +239,7 @@
 
 					//Get Temperature
 					var current_weather_div = document.getElementById("current_temperature_today");
-					var tempElement = document.createTextNode(temp)
+					var tempElement = document.createTextNode(temp + "\xB0" + "F");
 					var tempHeader = document.createElement("h1");
 					tempHeader.appendChild(tempElement);
 					current_weather_div.appendChild(tempHeader);
@@ -251,7 +250,7 @@
 							.createTextNode(description)
 					var descriptionHeader = document.createElement("h1");
 					descriptionHeader.appendChild(descriptionElement);
-					weatherDiv.appendChild(descriptionHeader);
+					weather_description_div.appendChild(descriptionHeader);
 
 					console.log('end weather js function');
 				} else if (header.includes("Gmail")) {
