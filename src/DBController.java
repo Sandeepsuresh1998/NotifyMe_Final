@@ -9,7 +9,7 @@ public class DBController {
 	public static void connect() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/FPDB?user=root&password=Huskers25!!&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/FPDB?user=root&password=root&useSSL=false");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -80,10 +80,10 @@ public class DBController {
 			ps.setString(4, pictureUrl);
 			ps.setString(5, email);
 			ps.setBoolean(6, true);
-			ps.setBoolean(7, false);
+			ps.setBoolean(7, true);
 			ps.setBoolean(8, true);
-			ps.setBoolean(9, false);
-			ps.setBoolean(10, false);
+			ps.setBoolean(9, true);
+			ps.setBoolean(10, true);
 			ps.setBoolean(11, true);
 			ps.executeUpdate();
 		} catch (SQLException e) {

@@ -26,9 +26,9 @@ public class StockAPI extends Thread {
 		        while ((inputLine = in.readLine()) != null) {
 		        		response += inputLine;
 		        }
-		        System.out.println("before sending stock");
-		        System.out.println(response);
+//		        System.out.println(response);
 		        String stockData = "Stocks|" + response;
+		        System.out.println("before sending stock");
 		        mSession.getBasicRemote().sendText(stockData);
 		        Thread.sleep(600000);
 			} catch (IOException ioe) {

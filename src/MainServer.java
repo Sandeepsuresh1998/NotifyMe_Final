@@ -35,22 +35,22 @@ public class MainServer {
 		} else {
 			ArrayList<Boolean> widgets = DBController.getWidgets(userId);
 			if (widgets.get(0)) {
-				TwitterApi tApi = new TwitterApi(session);
+				TwitterApi twitterApi = new TwitterApi(session);
 			}
-			if (!widgets.get(1)) {
-				GmailAPI gApi = new GmailAPI(session, DBController.getAccessToken(userId));
+			if (widgets.get(1)) {
+				GmailAPI gmailAPI = new GmailAPI(session, DBController.getAccessToken(userId));
 			}
 			if (widgets.get(2)) {
-				WeatherAPI wApi = new WeatherAPI(session);
+				WeatherAPI weatherAPI = new WeatherAPI(session);
 			}
-			if (!widgets.get(3)) {
-				CalendarAPI gApi = new CalendarAPI(session, DBController.getAccessToken(userId));
+			if (widgets.get(3)) {
+				CalendarAPI calendarAPI = new CalendarAPI(session, DBController.getAccessToken(userId));
 			}
-			if (!widgets.get(4)) {
-				YouTubeAPI gApi = new YouTubeAPI(session, DBController.getAccessToken(userId));
+			if (widgets.get(4)) {
+				YouTubeAPI youTubeAPI = new YouTubeAPI(session, DBController.getAccessToken(userId));
 			}
 			if (widgets.get(5)) {
-				StockAPI sAPI = new StockAPI(session);
+				StockAPI stockAPI = new StockAPI(session);
 			}
 		}
 		
