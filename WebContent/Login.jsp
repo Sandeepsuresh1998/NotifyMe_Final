@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%
-	if(request.getParameter("access_token") != null){
-		System.out.println("HERERERERERERERWERQWERQWERQWERQ");
-		String redirectURL = "homePage.jsp";
-	    response.sendRedirect(redirectURL);
-	}
-	
-%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,12 +42,25 @@
 		</a></li>
 	</ul>
 	</nav> </header>
-	<div class="text-center fill-available d-flex justify-content-center align-items-center">
+	<div
+		class="text-center fill-available d-flex justify-content-center align-items-center">
 		<div class="form-signin">
-			<button class="btn btn-lg  btn-outline-secondary btn-block" id="login"
-				onclick="trySampleRequest();" type="submit">Login with Google</button>
+			<%
+				if (session.getAttribute("userId") == null) {
+			%>
+			<button class="btn btn-lg  btn-outline-secondary btn-block"
+				id="login" onclick="trySampleRequest();" type="submit">Login
+				with Google</button>
 			<button class="btn btn-lg btn-outline-secondary btn-block" id="home"
 				onclick="toHomePage();" type="submit">Continue to Home Page</button>
+			<%
+				} else {
+			%>
+				<button class="btn btn-lg  btn-outline-secondary btn-block"
+				id="signOut" onclick="signOut();" type="submit">Sign Out</button>
+			<%
+				}
+			%>
 		</div>
 	</div>
 </body>

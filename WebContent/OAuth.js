@@ -164,9 +164,8 @@ function toHomePage() {
 }
 
 function signOut() {
-	var auth2 = gapi.auth2.getAuthInstance();
-	auth2.signOut().then(function() {
-		console.log('User signed out.');
-		localStorage.removeItem('oauth2-test-params');
-	});
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "SignOut", false);
+	xhttp.send();
+	window.location.href = "homePage.jsp";
 }

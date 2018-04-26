@@ -40,7 +40,7 @@
 				<li class="nav-item text-nowrap"><a
 					href="
 				<%if (session.getAttribute("userId") != null) {%>
-					profilePage.jsp
+					Login.jsp
 				<%} else {%>
 					Login.jsp
 				<%}%>
@@ -188,8 +188,6 @@
 							</iframe>
 							{{VIDEO
 							<%=i%>}} --%>
-								
-							</div>
 							<%
 								}
 							%>
