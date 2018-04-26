@@ -164,10 +164,10 @@
 			</div>
 			<div class="grid-item">
 				<div class="card-body">
-					<h5 class="card-title">Weather</h5>
+					<h5 class="card-title">Stocks</h5>
 					<div class="stockBody">
 						<div class="row">
-							<div class="col-sm-4" id="APPL"></div>
+							<div class="col-sm-4" id="AAPL"></div>
 							<div class="col-sm-4" id="NFLX"></div>
 							<div class="col-sm-4" id="MSFT"></div>
 							<div class="col-sm-4" id="TSLA"></div>
@@ -289,6 +289,7 @@
 					
 					
 					for(var i = 0; i < stocks.length; i++) {
+						console.log(stocks[i]['1. symbol']); 
 						stock_div = document.getElementById(stocks[i]['1. symbol']);
 						var price_text = document.createTextNode(stocks[i]['1. symbol'] + ": " + stocks[i]['2. price']);
 						var price = document.createElement("h1");
