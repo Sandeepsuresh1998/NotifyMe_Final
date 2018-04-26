@@ -17,7 +17,6 @@ public class WeatherAPI extends Thread{
 	
 	public void run() {
 		String weatherURL = "http://api.openweathermap.org/data/2.5/weather?id=5368381&APPID=2273fa9708ebadbe74541112635069ba";
-		while(true) {
 			try {
 				System.out.println("start weather");
 				URL url = new URL(weatherURL);
@@ -28,16 +27,13 @@ public class WeatherAPI extends Thread{
 		        while ((inputLine = in.readLine()) != null) {
 		        	response += inputLine;
 		        }
-//		        System.out.println(response);
 		        String weatherData = "Weather|" + response;
 		        System.out.println("before sending weather");
-//		        mSession.getBasicRemote().sendText(weatherData);
 		        MainServer.sendUpdate(mSession, weatherData);
 		        Thread.sleep(600000);  // 600 seconds
 			} catch (IOException | InterruptedException | IllegalStateException e) {
 				e.printStackTrace();
 			}
-		}
 		
 	}
 }

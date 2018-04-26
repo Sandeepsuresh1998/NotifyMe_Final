@@ -125,7 +125,7 @@
 					<h5 class="card-title">Stocks</h5>
 					<div class="stockBody">
 						<div class="row">
-							<div class="col-sm-4" id="APPL"></div>
+							<div class="col-sm-4" id="AAPL"></div>
 							<div class="col-sm-4" id="NFLX"></div>
 							<div class="col-sm-4" id="MSFT"></div>
 							<div class="col-sm-4" id="TSLA"></div>
@@ -242,8 +242,19 @@
 					console.log('end gmail js function');
 				} else if (header.includes("Stocks")) {
 					var obj = JSON.parse(data[1]);
+					
+					var stocks = obj['Stock Quotes'];
+					
+					
+					for(var i = 0; i < stocks.length; i++) {
+						console.log(stocks[i]['1. symbol']); 
+						stock_div = document.getElementById(stocks[i]['1. symbol']);
+						var price_text = document.createTextNode(stocks[i]['1. symbol'] + ": " + stocks[i]['2. price']);
+						var price = document.createElement("h1");
+						price.appendChild(price_text);
+						stock_div.appendChild(price);
+					}
 
-					//Put Crypto in its own div
 				} else if (header.includes("YouTube")) {
 					console.log('start youtube js function');
 
